@@ -48,8 +48,8 @@ export function OptimizationProgress({ open, progress }: OptimizationProgressPro
   const Icon = stageInfo.icon;
 
   return (
-    <Dialog open={open}>
-      <DialogContent className="sm:max-w-md" onPointerDownOutside={(e) => e.preventDefault()}>
+    <Dialog open={open} modal>
+      <DialogContent className="sm:max-w-md [&>button]:hidden">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <Icon className={`h-5 w-5 ${stageInfo.color} ${progress.stage === 'processing' ? 'animate-spin' : ''}`} />
