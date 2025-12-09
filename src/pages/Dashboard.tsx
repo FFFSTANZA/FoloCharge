@@ -106,7 +106,14 @@ export default function Dashboard() {
       <main className="container mx-auto px-4 py-8">
         <div className="space-y-8">
           <section>
-            <h2 className="text-xl font-semibold mb-4">Upload Log File</h2>
+            <div className="flex items-start justify-between mb-4">
+              <div>
+                <h2 className="text-xl font-semibold">Upload Log File</h2>
+                <p className="text-sm text-muted-foreground mt-1">
+                  Start by uploading your charger logs or try our sample data
+                </p>
+              </div>
+            </div>
             <FileUpload onFileSelect={handleFileSelect} isProcessing={isProcessing} />
           </section>
 

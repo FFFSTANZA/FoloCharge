@@ -6,6 +6,15 @@ FoloCharge is a web-based diagnostic tool for EV charging station owners to anal
 ## Getting Started
 
 ### 1. Upload Log File
+You have two options:
+
+#### Option A: Try Sample Data (Recommended for First-Time Users)
+- Click the **"Try Sample Data"** button to load pre-configured Indian EV charging station logs
+- This demonstrates all features with realistic fault scenarios
+- Includes data from popular Indian EVs (Tata Nexon EV, MG ZS EV)
+- Shows various fault types across multiple days
+
+#### Option B: Upload Your Own File
 - Click "Select File" or drag and drop your log file into the upload area
 - Supported formats: CSV, JSON, TXT
 - The tool will automatically parse and analyze the file
@@ -94,7 +103,12 @@ timestamp,errorCode,connectorId,temperature,voltage,current,ocppStatus,transacti
 ```
 
 ## Sample Data
-A sample log file is included at `/public/sample-logs.csv` for testing the tool.
+A comprehensive sample log file is included with 30+ fault entries spanning 6 days, featuring:
+- All 11 fault types for complete demonstration
+- Realistic Indian EV charging scenarios
+- References to popular Indian EV models (Tata Nexon EV, MG ZS EV)
+- Common issues like grid voltage fluctuations, high ambient temperatures, and BMS compatibility
+- Click **"Try Sample Data"** button to load instantly
 
 ## Tips for Best Results
 

@@ -1,16 +1,31 @@
 timestamp,errorCode,connectorId,temperature,voltage,current,ocppStatus,transactionStopReason
 2025-12-09 08:15:23,OC_001,Connector-1,45,380,85,Faulted,Overcurrent detected
-2025-12-09 09:30:45,OV_002,Connector-2,52,520,65,Faulted,Overvoltage protection
-2025-12-09 10:45:12,TEMP_003,Connector-1,78,400,70,Faulted,Overheating detected
-2025-12-09 11:20:33,BMS_004,Connector-3,40,380,50,Faulted,BMS communication timeout
-2025-12-09 12:05:18,NET_005,Connector-2,42,390,55,Offline,OCPP network disconnect
-2025-12-09 13:15:42,LV_006,Connector-1,38,180,30,Faulted,Low grid voltage
-2025-12-09 14:30:55,PWR_007,Connector-3,50,0,0,Faulted,Power module failure
-2025-12-09 15:45:20,EV_008,Connector-2,35,400,60,Available,EVDisconnected
-2025-12-09 16:10:38,ESTOP_009,Connector-1,40,380,0,Faulted,Emergency stop activated
-2025-12-09 17:25:15,CONT_010,Connector-3,45,385,0,Faulted,Contactor stuck open
-2025-12-09 18:40:22,RST_011,Connector-2,48,390,55,Faulted,Repeated soft restarts
-2025-12-08 08:15:23,OC_001,Connector-1,45,380,85,Faulted,Overcurrent detected
-2025-12-08 10:30:45,TEMP_003,Connector-2,75,400,70,Faulted,Overheating detected
-2025-12-08 14:45:12,PWR_007,Connector-1,50,0,0,Faulted,Power module failure
-2025-12-07 09:20:33,BMS_004,Connector-3,40,380,50,Faulted,BMS communication timeout
+2025-12-09 09:30:45,OV_002,Connector-2,52,520,65,Faulted,Overvoltage protection triggered
+2025-12-09 10:45:12,TEMP_003,Connector-1,78,400,70,Faulted,Overheating detected - ambient temp high
+2025-12-09 11:20:33,BMS_004,Connector-3,40,380,50,Faulted,BMS communication timeout with Tata Nexon EV
+2025-12-09 12:05:18,NET_005,Connector-2,42,390,55,Offline,OCPP network disconnect - check internet
+2025-12-09 13:15:42,LV_006,Connector-1,38,180,30,Faulted,Low grid voltage - utility issue
+2025-12-09 14:30:55,PWR_007,Connector-3,50,0,0,Faulted,Power module failure - requires vendor support
+2025-12-09 15:45:20,EV_008,Connector-2,35,400,60,Available,EVDisconnected by user
+2025-12-09 16:10:38,ESTOP_009,Connector-1,40,380,0,Faulted,Emergency stop button pressed
+2025-12-09 17:25:15,CONT_010,Connector-3,45,385,0,Faulted,Contactor relay stuck open
+2025-12-09 18:40:22,RST_011,Connector-2,48,390,55,Faulted,Repeated soft restarts detected
+2025-12-09 19:15:30,OC_001,Connector-1,46,385,82,Faulted,Overcurrent during fast charging
+2025-12-09 20:30:12,TEMP_003,Connector-3,72,395,68,Faulted,Temperature rising - check cooling fan
+2025-12-08 08:15:23,OC_001,Connector-1,45,380,85,Faulted,Overcurrent protection activated
+2025-12-08 10:30:45,TEMP_003,Connector-2,75,400,70,Faulted,Overheating - summer heat issue
+2025-12-08 14:45:12,PWR_007,Connector-1,50,0,0,Faulted,Power module hardware failure
+2025-12-08 16:20:30,LV_006,Connector-3,39,175,28,Faulted,Grid voltage drop during peak hours
+2025-12-08 18:45:55,BMS_004,Connector-2,41,385,52,Faulted,BMS handshake failed with MG ZS EV
+2025-12-07 09:20:33,BMS_004,Connector-3,40,380,50,Faulted,BMS communication error
+2025-12-07 11:35:18,NET_005,Connector-1,43,388,54,Offline,Network connectivity lost
+2025-12-07 14:50:42,OV_002,Connector-2,51,515,63,Faulted,Overvoltage detected from grid
+2025-12-07 17:15:25,CONT_010,Connector-3,44,382,0,Faulted,Contactor malfunction
+2025-12-06 10:25:15,TEMP_003,Connector-1,76,398,69,Faulted,High ambient temperature affecting cooling
+2025-12-06 13:40:30,LV_006,Connector-2,37,185,32,Faulted,Low voltage from transformer
+2025-12-06 16:55:45,RST_011,Connector-3,47,392,56,Faulted,Multiple restart cycles
+2025-12-05 09:10:20,PWR_007,Connector-2,49,0,0,Faulted,Power conversion module failed
+2025-12-05 12:25:35,OC_001,Connector-1,44,378,84,Faulted,Current limit exceeded
+2025-12-05 15:40:50,ESTOP_009,Connector-3,41,383,0,Faulted,Emergency stop activated by operator
+2025-12-04 08:30:15,BMS_004,Connector-2,42,381,51,Faulted,Vehicle BMS protocol mismatch
+2025-12-04 11:45:30,NET_005,Connector-1,43,387,53,Offline,OCPP backend unreachable
