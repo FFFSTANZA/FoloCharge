@@ -48,72 +48,72 @@ export default function DashboardHome() {
 
       {/* Top Widgets - Large Cards */}
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-        <Card className="card-hover animate-slide-up shadow-premium" style={{ animationDelay: '0.1s' }}>
+        <Card className="card-hover animate-slide-up shadow-premium flex flex-col" style={{ animationDelay: '0.1s' }}>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Today's Faults</CardTitle>
             <Activity className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
-          <CardContent>
+          <CardContent className="flex-1 flex flex-col">
             <div className="text-3xl font-bold">{todayFaults}</div>
-            <p className="text-xs text-muted-foreground mt-1">
+            <p className="text-xs text-muted-foreground mt-1 flex-1">
               Detected issues requiring attention
             </p>
-            <Link to="/fault-diagnosis">
-              <Button variant="link" className="px-0 mt-2 text-primary">
+            <Link to="/fault-diagnosis" className="mt-3">
+              <Button variant="link" className="h-auto p-0 text-primary font-medium">
                 View Details →
               </Button>
             </Link>
           </CardContent>
         </Card>
 
-        <Card className="card-hover animate-slide-up shadow-premium" style={{ animationDelay: '0.2s' }}>
+        <Card className="card-hover animate-slide-up shadow-premium flex flex-col" style={{ animationDelay: '0.2s' }}>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Downtime Loss</CardTitle>
             <DollarSign className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
-          <CardContent>
+          <CardContent className="flex-1 flex flex-col">
             <div className="text-3xl font-bold">₹{todayLoss.toLocaleString()}</div>
-            <p className="text-xs text-muted-foreground mt-1">
+            <p className="text-xs text-muted-foreground mt-1 flex-1">
               Today • ₹{monthLoss.toLocaleString()} this month
             </p>
-            <Link to="/cost-analysis">
-              <Button variant="link" className="px-0 mt-2 text-primary">
+            <Link to="/cost-analysis" className="mt-3">
+              <Button variant="link" className="h-auto p-0 text-primary font-medium">
                 View Analysis →
               </Button>
             </Link>
           </CardContent>
         </Card>
 
-        <Card className="card-hover animate-slide-up shadow-premium" style={{ animationDelay: '0.3s' }}>
+        <Card className="card-hover animate-slide-up shadow-premium flex flex-col" style={{ animationDelay: '0.3s' }}>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Critical Alerts</CardTitle>
             <AlertTriangle className="h-4 w-4 text-destructive" />
           </CardHeader>
-          <CardContent>
+          <CardContent className="flex-1 flex flex-col">
             <div className="text-3xl font-bold text-destructive">{criticalAlerts}</div>
-            <p className="text-xs text-muted-foreground mt-1">
+            <p className="text-xs text-muted-foreground mt-1 flex-1">
               {highRiskChargers} high-risk chargers detected
             </p>
-            <Link to="/predictive">
-              <Button variant="link" className="px-0 mt-2 text-destructive">
+            <Link to="/predictive" className="mt-3">
+              <Button variant="link" className="h-auto p-0 text-destructive font-medium">
                 View Alerts →
               </Button>
             </Link>
           </CardContent>
         </Card>
 
-        <Card className="card-hover animate-slide-up shadow-premium" style={{ animationDelay: '0.4s' }}>
+        <Card className="card-hover animate-slide-up shadow-premium flex flex-col" style={{ animationDelay: '0.4s' }}>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Fleet Health</CardTitle>
             <Zap className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
-          <CardContent>
+          <CardContent className="flex-1 flex flex-col">
             <div className="text-3xl font-bold">{avgHealthScore}%</div>
-            <p className="text-xs text-muted-foreground mt-1">
+            <p className="text-xs text-muted-foreground mt-1 flex-1">
               Average charger health score
             </p>
-            <Link to="/predictive">
-              <Button variant="link" className="px-0 mt-2 text-primary">
+            <Link to="/predictive" className="mt-3">
+              <Button variant="link" className="h-auto p-0 text-primary font-medium">
                 View Health →
               </Button>
             </Link>
@@ -124,7 +124,7 @@ export default function DashboardHome() {
       {/* Secondary Widgets */}
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {/* Top Earning Sites */}
-        <Card className="card-hover animate-slide-up" style={{ animationDelay: '0.5s' }}>
+        <Card className="card-hover animate-slide-up flex flex-col" style={{ animationDelay: '0.5s' }}>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <TrendingUp className="h-5 w-5 text-success" />
@@ -132,20 +132,22 @@ export default function DashboardHome() {
             </CardTitle>
             <CardDescription>Highest revenue generators this month</CardDescription>
           </CardHeader>
-          <CardContent className="space-y-4">
-            {topSites.map((site, index) => (
-              <div key={index} className="flex items-center justify-between">
-                <div>
-                  <p className="font-medium">{site.name}</p>
-                  <p className="text-xs text-muted-foreground">{site.sessions} sessions</p>
+          <CardContent className="flex-1 flex flex-col space-y-4">
+            <div className="space-y-4 flex-1">
+              {topSites.map((site, index) => (
+                <div key={index} className="flex items-center justify-between">
+                  <div>
+                    <p className="font-medium">{site.name}</p>
+                    <p className="text-xs text-muted-foreground">{site.sessions} sessions</p>
+                  </div>
+                  <div className="text-right">
+                    <p className="font-bold text-success">₹{site.revenue.toLocaleString()}</p>
+                  </div>
                 </div>
-                <div className="text-right">
-                  <p className="font-bold text-success">₹{site.revenue.toLocaleString()}</p>
-                </div>
-              </div>
-            ))}
-            <Link to="/performance-analytics">
-              <Button variant="outline" className="w-full mt-2">
+              ))}
+            </div>
+            <Link to="/performance-analytics" className="w-full">
+              <Button variant="outline" className="w-full">
                 View All Sites
               </Button>
             </Link>
@@ -153,7 +155,7 @@ export default function DashboardHome() {
         </Card>
 
         {/* Fault Distribution */}
-        <Card className="card-hover animate-slide-up" style={{ animationDelay: '0.6s' }}>
+        <Card className="card-hover animate-slide-up flex flex-col" style={{ animationDelay: '0.6s' }}>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <BarChart3 className="h-5 w-5 text-primary" />
@@ -161,23 +163,25 @@ export default function DashboardHome() {
             </CardTitle>
             <CardDescription>Most common issues this week</CardDescription>
           </CardHeader>
-          <CardContent className="space-y-3">
-            {faultDistribution.map((fault, index) => (
-              <div key={index} className="space-y-1">
-                <div className="flex items-center justify-between text-sm">
-                  <span className="font-medium">{fault.type}</span>
-                  <span className="text-muted-foreground">{fault.count}</span>
+          <CardContent className="flex-1 flex flex-col space-y-3">
+            <div className="space-y-3 flex-1">
+              {faultDistribution.map((fault, index) => (
+                <div key={index} className="space-y-1">
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="font-medium">{fault.type}</span>
+                    <span className="text-muted-foreground">{fault.count}</span>
+                  </div>
+                  <div className="h-2 w-full bg-muted rounded-full overflow-hidden">
+                    <div
+                      className={`h-full ${fault.color} transition-smooth`}
+                      style={{ width: `${(fault.count / 23) * 100}%` }}
+                    />
+                  </div>
                 </div>
-                <div className="h-2 w-full bg-muted rounded-full overflow-hidden">
-                  <div
-                    className={`h-full ${fault.color} transition-smooth`}
-                    style={{ width: `${(fault.count / 23) * 100}%` }}
-                  />
-                </div>
-              </div>
-            ))}
-            <Link to="/fault-diagnosis">
-              <Button variant="outline" className="w-full mt-2">
+              ))}
+            </div>
+            <Link to="/fault-diagnosis" className="w-full">
+              <Button variant="outline" className="w-full">
                 View All Faults
               </Button>
             </Link>
@@ -185,7 +189,7 @@ export default function DashboardHome() {
         </Card>
 
         {/* Sites Needing Attention */}
-        <Card className="card-hover animate-slide-up border-destructive/50" style={{ animationDelay: '0.7s' }}>
+        <Card className="card-hover animate-slide-up border-destructive/50 flex flex-col" style={{ animationDelay: '0.7s' }}>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <AlertTriangle className="h-5 w-5 text-destructive" />
@@ -193,23 +197,25 @@ export default function DashboardHome() {
             </CardTitle>
             <CardDescription>Chargers requiring urgent action</CardDescription>
           </CardHeader>
-          <CardContent className="space-y-3">
-            {sitesNeedingAttention.map((site, index) => (
-              <div key={index} className="flex items-start justify-between gap-2">
-                <div className="flex-1">
-                  <p className="font-medium text-sm">{site.name}</p>
-                  <p className="text-xs text-muted-foreground">{site.issue}</p>
+          <CardContent className="flex-1 flex flex-col space-y-3">
+            <div className="space-y-3 flex-1">
+              {sitesNeedingAttention.map((site, index) => (
+                <div key={index} className="flex items-start justify-between gap-2">
+                  <div className="flex-1">
+                    <p className="font-medium text-sm">{site.name}</p>
+                    <p className="text-xs text-muted-foreground">{site.issue}</p>
+                  </div>
+                  <Badge
+                    variant={site.risk === 'Critical' ? 'destructive' : 'default'}
+                    className="flex-shrink-0"
+                  >
+                    {site.risk}
+                  </Badge>
                 </div>
-                <Badge
-                  variant={site.risk === 'Critical' ? 'destructive' : 'default'}
-                  className="flex-shrink-0"
-                >
-                  {site.risk}
-                </Badge>
-              </div>
-            ))}
-            <Link to="/predictive">
-              <Button variant="destructive" className="w-full mt-2">
+              ))}
+            </div>
+            <Link to="/predictive" className="w-full">
+              <Button variant="destructive" className="w-full">
                 View All Alerts
               </Button>
             </Link>

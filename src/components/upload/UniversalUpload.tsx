@@ -365,7 +365,7 @@ export function UniversalUpload() {
         </div>
 
         {/* Action Buttons */}
-        <div className="flex gap-3">
+        <div className="flex flex-col sm:flex-row gap-3">
           <Button
             onClick={handleProcessAllData}
             disabled={isProcessing || (!logsFile && !revenueFile)}
@@ -380,7 +380,7 @@ export function UniversalUpload() {
             ) : (
               <>
                 <Database className="h-4 w-4" />
-                Process All Data → Feed All Modules
+                Process All Data
               </>
             )}
           </Button>
@@ -390,7 +390,7 @@ export function UniversalUpload() {
             disabled={isProcessing}
             variant="outline"
             size="lg"
-            className="gap-2"
+            className="flex-1 gap-2"
           >
             <FileText className="h-4 w-4" />
             Load Sample Data

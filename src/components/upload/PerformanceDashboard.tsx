@@ -24,39 +24,39 @@ export function PerformanceDashboard({ stats }: PerformanceDashboardProps) {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <div className="grid gap-4 md:grid-cols-3">
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {/* Total Lines */}
-          <div className="space-y-2">
+          <div className="space-y-2 p-4 bg-muted/50 rounded-lg">
             <div className="flex items-center gap-2">
               <FileText className="h-4 w-4 text-muted-foreground" />
               <span className="text-sm font-medium">Total Lines</span>
             </div>
-            <p className="text-3xl font-bold">{stats.totalLines.toLocaleString()}</p>
+            <p className="text-2xl font-bold">{stats.totalLines.toLocaleString()}</p>
             <p className="text-xs text-muted-foreground">Original log entries</p>
           </div>
 
           {/* Cleaned Lines */}
-          <div className="space-y-2">
+          <div className="space-y-2 p-4 bg-muted/50 rounded-lg">
             <div className="flex items-center gap-2">
               <Filter className="h-4 w-4 text-green-500" />
               <span className="text-sm font-medium">Cleaned Lines</span>
             </div>
-            <p className="text-3xl font-bold text-green-600">{stats.cleanedLines.toLocaleString()}</p>
+            <p className="text-2xl font-bold text-green-600">{stats.cleanedLines.toLocaleString()}</p>
             <p className="text-xs text-muted-foreground">After optimization</p>
           </div>
 
           {/* Size Reduction */}
-          <div className="space-y-2">
+          <div className="space-y-2 p-4 bg-muted/50 rounded-lg">
             <div className="flex items-center gap-2">
               <TrendingDown className="h-4 w-4 text-primary" />
               <span className="text-sm font-medium">Size Reduction</span>
             </div>
-            <p className="text-3xl font-bold text-primary">{compressionRatio}%</p>
+            <p className="text-2xl font-bold text-primary">{compressionRatio}%</p>
             <p className="text-xs text-muted-foreground">Data compressed</p>
           </div>
 
           {/* Duplicates Removed */}
-          <div className="space-y-2">
+          <div className="space-y-2 p-4 bg-muted/50 rounded-lg">
             <div className="flex items-center gap-2">
               <Copy className="h-4 w-4 text-yellow-500" />
               <span className="text-sm font-medium">Duplicates Removed</span>
@@ -66,7 +66,7 @@ export function PerformanceDashboard({ stats }: PerformanceDashboardProps) {
           </div>
 
           {/* Noise Removed */}
-          <div className="space-y-2">
+          <div className="space-y-2 p-4 bg-muted/50 rounded-lg">
             <div className="flex items-center gap-2">
               <Filter className="h-4 w-4 text-orange-500" />
               <span className="text-sm font-medium">Noise Removed</span>
@@ -76,7 +76,7 @@ export function PerformanceDashboard({ stats }: PerformanceDashboardProps) {
           </div>
 
           {/* Fault Clusters */}
-          <div className="space-y-2">
+          <div className="space-y-2 p-4 bg-muted/50 rounded-lg">
             <div className="flex items-center gap-2">
               <Layers className="h-4 w-4 text-purple-500" />
               <span className="text-sm font-medium">Fault Clusters</span>
