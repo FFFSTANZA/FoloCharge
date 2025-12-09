@@ -2,10 +2,11 @@
 
 ## Overview
 
-FoloCharge is a comprehensive web-based diagnostic and analytics platform designed for Indian EV charging station owners and operators. The suite includes two powerful modules:
+FoloCharge is a comprehensive web-based diagnostic and analytics platform designed for Indian EV charging station owners and operators. The suite includes three powerful modules:
 
 1. **Fault Diagnoser** - Analyze charger failures and calculate revenue impact
 2. **Revenue Analyzer** - Multi-site performance analysis and business recommendations
+3. **Predictive Failure Indicator** - Rule-based pattern detection for proactive maintenance
 
 ## Features
 
@@ -29,22 +30,34 @@ FoloCharge is a comprehensive web-based diagnostic and analytics platform design
 - Dead and underutilized charger alerts
 - Sample data for instant demo
 
+### Module 3: Predictive Failure Indicator (NEW!)
+- Rule-based pattern detection (no AI required)
+- 6 critical failure patterns monitored
+- Risk classification (Medium/High/Critical)
+- Charger health scores (0-100)
+- Estimated time to failure
+- Revenue loss projections
+- Actionable maintenance recommendations
+- Predictive sample data with deliberate patterns
+
 ## Quick Start
 
 ### Try the Application
 1. Open the application in your browser
 2. Use the navigation bar to switch between modules
-3. Click "Try Sample Data" in either module to explore features
+3. Click "Try Sample Data" or "Predictive Sample" to explore features
 4. Upload your own data files for real analysis
 
 ### Sample Data
 - **Fault Diagnoser**: 30 fault entries from Indian EV charging stations
+- **Predictive Sample**: 73 faults with 6 at-risk chargers demonstrating failure patterns
 - **Revenue Analyzer**: 64 sessions across 6 sites in India
 
 ## Documentation
 
 - **USAGE_GUIDE.md** - Fault Diagnoser user guide
 - **ANALYZER_GUIDE.md** - Revenue Analyzer user guide
+- **PHASE3_PREDICTIVE.md** - Predictive Failure Indicator guide (NEW!)
 - **FEATURES.md** - Complete feature list
 - **IMPLEMENTATION_SUMMARY.md** - Phase 1 technical details
 - **PHASE2_SUMMARY.md** - Phase 2 technical details

@@ -75,6 +75,27 @@ export function FileUpload({ onFileSelect, isProcessing }: FileUploadProps) {
     }
   }, [onFileSelect, toast]);
 
+  const handleLoadPredictiveSample = useCallback(async () => {
+    try {
+      const response = await fetch('/sample-logs-predictive.csv');
+      const blob = await response.blob();
+      const file = new File([blob], 'sample-logs-predictive.csv', { type: 'text/csv' });
+      
+      toast({
+        title: 'Predictive Sample Loaded',
+        description: 'Loading sample data with failure patterns for predictive analysis...',
+      });
+      
+      onFileSelect(file);
+    } catch (error) {
+      toast({
+        title: 'Failed to Load Sample',
+        description: 'Could not load sample data. Please upload your own file.',
+        variant: 'destructive'
+      });
+    }
+  }, [onFileSelect, toast]);
+
   return (
     <Card
       className={`border-2 border-dashed transition-colors ${
@@ -124,15 +145,27 @@ export function FileUpload({ onFileSelect, isProcessing }: FileUploadProps) {
           <div className="flex-1 h-px bg-border" />
         </div>
 
-        <Button
-          variant="outline"
-          onClick={handleLoadSample}
-          disabled={isProcessing}
-          className="border-primary/50 hover:bg-primary/5"
-        >
-          <Sparkles className="mr-2 h-4 w-4 text-primary" />
-          Try Sample Data
-        </Button>
+        <div className="flex gap-2">
+          <Button
+            variant="outline"
+            onClick={handleLoadSample}
+            disabled={isProcessing}
+            className="border-primary/50 hover:bg-primary/5"
+          >
+            <Sparkles className="mr-2 h-4 w-4 text-primary" />
+            Try Sample Data
+          </Button>
+
+          <Button
+            variant="outline"
+            onClick={handleLoadPredictiveSample}
+            disabled={isProcessing}
+            className="border-orange-500/50 hover:bg-orange-500/5"
+          >
+            <Sparkles className="mr-2 h-4 w-4 text-orange-600" />
+            Predictive Sample
+          </Button>
+        </div>
 
         <p className="text-xs text-muted-foreground mt-4">
           Supported formats: CSV, JSON, TXT

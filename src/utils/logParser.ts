@@ -21,6 +21,8 @@ export function parseCSV(content: string): LogEntry[] {
         entry.timestamp = value;
       } else if (header.includes('connector')) {
         entry.connectorId = value;
+      } else if (header.includes('charger')) {
+        entry.chargerId = value;
       } else if (header.includes('meter') || header.includes('value')) {
         entry.meterValue = parseFloat(value);
       } else if (header.includes('temp')) {

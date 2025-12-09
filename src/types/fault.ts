@@ -17,6 +17,7 @@ export interface LogEntry {
   errorCode?: string;
   timestamp?: string;
   connectorId?: string;
+  chargerId?: string;
   meterValue?: number;
   temperature?: number;
   voltage?: number;

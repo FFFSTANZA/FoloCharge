@@ -1,0 +1,71 @@
+timestamp,errorCode,connectorId,chargerId,temperature,voltage,current,ocppStatus,transactionStopReason
+2025-12-02 08:15:23,TEMP_001,1,CHG-MUM-01,75,380,85,Faulted,Overheating detected
+2025-12-03 09:30:45,TEMP_002,1,CHG-MUM-01,78,380,82,Faulted,Overheating detected
+2025-12-04 10:45:12,TEMP_003,1,CHG-MUM-01,80,380,80,Faulted,Overheating detected - cooling fan issue
+2025-12-05 11:20:33,TEMP_004,1,CHG-MUM-01,82,380,78,Faulted,Overheating detected
+2025-12-06 12:05:18,TEMP_005,1,CHG-MUM-01,85,380,75,Faulted,Critical overheating - ambient temp high
+2025-12-07 13:15:42,TEMP_006,1,CHG-MUM-01,83,380,77,Faulted,Overheating detected
+2025-12-08 14:30:55,TEMP_007,1,CHG-MUM-01,86,380,73,Faulted,Overheating detected
+2025-12-09 08:00:00,TEMP_008,1,CHG-MUM-01,88,380,70,Faulted,Critical overheating - fan failure suspected
+2025-12-09 08:15:23,NET_001,2,CHG-DEL-02,42,390,55,Offline,OCPP network disconnect
+2025-12-09 08:45:30,NET_002,2,CHG-DEL-02,42,390,55,Offline,OCPP network disconnect
+2025-12-09 09:15:45,NET_003,2,CHG-DEL-02,42,390,55,Offline,OCPP network disconnect
+2025-12-09 09:45:12,NET_004,2,CHG-DEL-02,42,390,55,Offline,OCPP network disconnect
+2025-12-09 10:20:33,NET_005,2,CHG-DEL-02,42,390,55,Offline,OCPP network disconnect
+2025-12-09 11:05:18,NET_006,2,CHG-DEL-02,42,390,55,Offline,OCPP network disconnect
+2025-12-09 12:15:42,NET_007,2,CHG-DEL-02,42,390,55,Offline,OCPP network disconnect
+2025-12-09 13:30:55,NET_008,2,CHG-DEL-02,42,390,55,Offline,OCPP network disconnect
+2025-12-09 14:45:20,NET_009,2,CHG-DEL-02,42,390,55,Offline,OCPP network disconnect
+2025-12-09 15:10:38,NET_010,2,CHG-DEL-02,42,390,55,Offline,OCPP network disconnect
+2025-12-09 16:25:50,NET_011,2,CHG-DEL-02,42,390,55,Offline,OCPP network disconnect
+2025-12-09 17:40:15,NET_012,2,CHG-DEL-02,42,390,55,Offline,OCPP network disconnect
+2025-12-09 18:55:30,NET_013,2,CHG-DEL-02,42,390,55,Offline,OCPP network disconnect
+2025-12-09 20:10:45,NET_014,2,CHG-DEL-02,42,390,55,Offline,OCPP network disconnect
+2025-12-09 21:25:00,NET_015,2,CHG-DEL-02,42,390,55,Offline,OCPP network disconnect
+2025-12-09 22:40:15,NET_016,2,CHG-DEL-02,42,390,55,Offline,OCPP network disconnect
+2025-12-09 23:55:30,NET_017,2,CHG-DEL-02,42,390,55,Offline,OCPP network disconnect
+2025-12-05 08:00:00,RST_001,1,CHG-BLR-03,40,380,60,Available,Soft restart
+2025-12-05 10:30:00,RST_002,1,CHG-BLR-03,40,380,60,Available,Soft restart
+2025-12-05 13:00:00,RST_003,1,CHG-BLR-03,40,380,60,Available,Soft restart
+2025-12-05 15:30:00,RST_004,1,CHG-BLR-03,40,380,60,Available,Soft restart
+2025-12-05 18:00:00,RST_005,1,CHG-BLR-03,40,380,60,Available,Soft restart
+2025-12-06 09:00:00,RST_006,1,CHG-BLR-03,40,380,60,Available,Soft restart
+2025-12-06 12:00:00,RST_007,1,CHG-BLR-03,40,380,60,Available,Soft restart
+2025-12-06 15:00:00,RST_008,1,CHG-BLR-03,40,380,60,Available,Soft restart
+2025-12-06 18:00:00,RST_009,1,CHG-BLR-03,40,380,60,Available,Soft restart
+2025-12-07 08:00:00,RST_010,1,CHG-BLR-03,40,380,60,Available,Soft restart
+2025-12-07 11:00:00,RST_011,1,CHG-BLR-03,40,380,60,Available,Soft restart
+2025-12-07 14:00:00,RST_012,1,CHG-BLR-03,40,380,60,Available,Soft restart
+2025-12-08 09:00:00,RST_013,1,CHG-BLR-03,40,380,60,Available,Soft restart
+2025-12-08 12:00:00,RST_014,1,CHG-BLR-03,40,380,60,Available,Soft restart
+2025-12-08 15:00:00,RST_015,1,CHG-BLR-03,40,380,60,Available,Soft restart
+2025-12-09 08:00:00,RST_016,1,CHG-BLR-03,40,380,60,Available,Soft restart
+2025-12-09 11:00:00,RST_017,1,CHG-BLR-03,40,380,60,Available,Soft restart
+2025-12-09 14:00:00,RST_018,1,CHG-BLR-03,40,380,60,Available,Soft restart
+2025-12-09 17:00:00,RST_019,1,CHG-BLR-03,40,380,60,Available,Soft restart
+2025-12-09 20:00:00,RST_020,1,CHG-BLR-03,40,380,60,Available,Soft restart
+2025-12-03 08:00:00,EV_001,2,CHG-PUN-04,35,400,60,Available,EVDisconnected by vehicle
+2025-12-04 09:00:00,EV_002,2,CHG-PUN-04,35,400,60,Available,EVDisconnected by vehicle
+2025-12-05 10:00:00,EV_003,2,CHG-PUN-04,35,400,60,Available,EVDisconnected by vehicle - BMS issue
+2025-12-06 11:00:00,EV_004,2,CHG-PUN-04,35,400,60,Available,EVDisconnected by vehicle
+2025-12-07 12:00:00,EV_005,2,CHG-PUN-04,35,400,60,Available,EVDisconnected by vehicle
+2025-12-08 13:00:00,EV_006,2,CHG-PUN-04,35,400,60,Available,EVDisconnected by vehicle
+2025-12-09 14:00:00,EV_007,2,CHG-PUN-04,35,400,60,Available,EVDisconnected by vehicle - BMS issue
+2025-12-04 08:00:00,PWR_001,1,CHG-CHN-05,50,380,90,Faulted,Overcurrent detected
+2025-12-05 09:00:00,PWR_002,1,CHG-CHN-05,50,380,92,Faulted,Overcurrent detected
+2025-12-06 10:00:00,PWR_003,1,CHG-CHN-05,50,0,0,Faulted,Power module failure
+2025-12-07 11:00:00,PWR_004,1,CHG-CHN-05,50,380,88,Faulted,Overcurrent detected
+2025-12-08 12:00:00,PWR_005,1,CHG-CHN-05,50,0,0,Faulted,Power module failure
+2025-12-09 13:00:00,PWR_006,1,CHG-CHN-05,50,380,85,Faulted,Overcurrent detected
+2025-12-03 08:00:00,LV_001,1,CHG-HYD-06,38,180,30,Faulted,Low grid voltage
+2025-12-04 09:00:00,OV_001,1,CHG-HYD-06,38,520,65,Faulted,Overvoltage protection triggered
+2025-12-05 10:00:00,LV_002,1,CHG-HYD-06,38,170,28,Faulted,Low grid voltage
+2025-12-06 11:00:00,OV_002,1,CHG-HYD-06,38,530,68,Faulted,Overvoltage protection triggered
+2025-12-07 12:00:00,LV_003,1,CHG-HYD-06,38,175,29,Faulted,Low grid voltage
+2025-12-08 13:00:00,OV_003,1,CHG-HYD-06,38,525,66,Faulted,Overvoltage protection triggered
+2025-12-09 14:00:00,LV_004,1,CHG-HYD-06,38,165,27,Faulted,Low grid voltage
+2025-12-09 15:00:00,OV_004,1,CHG-HYD-06,38,535,70,Faulted,Overvoltage protection triggered
+2025-12-09 09:00:00,OC_001,2,CHG-MUM-01,45,380,85,Faulted,Overcurrent detected
+2025-12-09 10:00:00,BMS_001,3,CHG-DEL-02,40,380,50,Faulted,BMS communication timeout with Tata Nexon EV
+2025-12-09 11:00:00,ESTOP_001,1,CHG-BLR-03,40,380,0,Faulted,Emergency stop button pressed
+2025-12-09 12:00:00,CONT_001,2,CHG-PUN-04,42,380,0,Faulted,Contactor stuck - requires inspection
