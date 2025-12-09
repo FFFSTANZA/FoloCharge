@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, ReactNode } from 'react';
 import type { FaultAnalysis } from '@/types/fault';
 import type { SessionData, SiteMetrics, ChargerMetrics } from '@/types/analytics';
+import { loadSampleData as loadSample } from '@/utils/sampleDataLoader';
 
 interface HealthData {
   chargerId: string;
@@ -67,8 +68,15 @@ export function DataProvider({ children }: { children: ReactNode }) {
   };
 
   const loadSampleData = () => {
-    // This will be implemented to load sample data for all modules
-    console.log('Loading sample data...');
+    const sampleData = loadSample();
+    setGlobalParsedLogsData(sampleData.faults);
+    setGlobalParsedRevenueData(sampleData.sessions);
+    setSiteMetrics(sampleData.siteMetrics);
+    setChargerMetrics(sampleData.chargerMetrics);
+    setHealthData(sampleData.healthData);
+    setIsLogsUploaded(true);
+    setIsRevenueUploaded(true);
+    setIsProcessed(true);
   };
 
   const value: GlobalDataContextType = {
