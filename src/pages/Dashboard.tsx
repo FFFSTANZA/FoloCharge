@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Zap } from 'lucide-react';
 import { FileUpload } from '@/components/fault/FileUpload';
 import { FaultSummary } from '@/components/fault/FaultSummary';
 import { FaultTable } from '@/components/fault/FaultTable';
@@ -91,14 +90,11 @@ export default function Dashboard() {
     <div className="min-h-screen bg-background">
       <header className="border-b bg-card">
         <div className="container mx-auto px-4 py-6">
-          <div className="flex items-center gap-3">
-            <div className="rounded-lg bg-primary p-2">
-              <Zap className="h-6 w-6 text-primary-foreground" />
-            </div>
-            <div>
-              <h1 className="text-2xl font-bold">FoloCharge</h1>
-              <p className="text-sm text-muted-foreground">Fault Diagnoser</p>
-            </div>
+          <div>
+            <h1 className="text-3xl font-bold">Fault Diagnoser</h1>
+            <p className="text-muted-foreground mt-1">
+              Analyze charger failures and calculate revenue impact
+            </p>
           </div>
         </div>
       </header>
