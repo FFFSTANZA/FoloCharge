@@ -150,33 +150,40 @@ export default function Help() {
               </AccordionContent>
             </AccordionItem>
 
-            <AccordionItem value="site-analytics">
+            <AccordionItem value="performance-analytics">
               <AccordionTrigger className="text-left">
                 <div className="flex items-center gap-2">
                   <BarChart3 className="h-4 w-4 text-primary" />
-                  <span>Site Analytics</span>
+                  <span>Performance Analytics</span>
                 </div>
               </AccordionTrigger>
-              <AccordionContent className="space-y-2 text-sm">
-                <p><strong>Purpose:</strong> Multi-site performance comparison and optimization</p>
-                <p><strong>Input:</strong> Session data files (CSV)</p>
-                <p><strong>Metrics:</strong> Revenue, utilization, sessions, energy delivered, avg ticket size</p>
-                <p><strong>Output:</strong> Site rankings, performance insights, business recommendations</p>
-              </AccordionContent>
-            </AccordionItem>
-
-            <AccordionItem value="charger-analytics">
-              <AccordionTrigger className="text-left">
-                <div className="flex items-center gap-2">
-                  <BarChart3 className="h-4 w-4 text-primary" />
-                  <span>Charger Analytics</span>
+              <AccordionContent className="space-y-3 text-sm">
+                <div>
+                  <p className="font-semibold mb-1">Purpose:</p>
+                  <p>Unified analytics for multi-site and individual charger performance tracking</p>
                 </div>
-              </AccordionTrigger>
-              <AccordionContent className="space-y-2 text-sm">
-                <p><strong>Purpose:</strong> Individual charger performance tracking</p>
-                <p><strong>Classification:</strong> Star Performer, Consistent, Underperformer, Idle</p>
-                <p><strong>Metrics:</strong> Revenue per charger, utilization rate, session count</p>
-                <p><strong>Action:</strong> Identify underperforming units for maintenance or relocation</p>
+                <div>
+                  <p className="font-semibold mb-1">Site View:</p>
+                  <ul className="list-disc list-inside space-y-1 ml-2">
+                    <li>Multi-site revenue comparison</li>
+                    <li>Utilization rates and peak hours</li>
+                    <li>Energy delivered and session counts</li>
+                    <li>Site rankings and performance insights</li>
+                  </ul>
+                </div>
+                <div>
+                  <p className="font-semibold mb-1">Charger View:</p>
+                  <ul className="list-disc list-inside space-y-1 ml-2">
+                    <li>Individual charger classification (Star, Consistent, Underperformer, Idle)</li>
+                    <li>Revenue per charger and utilization rates</li>
+                    <li>Fault counts and risk scores</li>
+                    <li>Predictive failure status</li>
+                  </ul>
+                </div>
+                <div>
+                  <p className="font-semibold mb-1">Recommendations:</p>
+                  <p>Click "View Recommendations" to see actionable insights for performance optimization, pricing strategies, and maintenance priorities</p>
+                </div>
               </AccordionContent>
             </AccordionItem>
           </Accordion>

@@ -155,18 +155,9 @@ export default function About() {
             <div className="flex items-start gap-3">
               <Badge className="mt-0.5">4</Badge>
               <div>
-                <h3 className="font-semibold">Site Analytics</h3>
+                <h3 className="font-semibold">Performance Analytics</h3>
                 <p className="text-sm text-muted-foreground">
-                  Multi-site performance comparison with revenue, utilization, and efficiency metrics
-                </p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <Badge className="mt-0.5">5</Badge>
-              <div>
-                <h3 className="font-semibold">Charger Analytics</h3>
-                <p className="text-sm text-muted-foreground">
-                  Individual charger classification and performance tracking for optimization
+                  Unified analytics with Site View for multi-site comparison and Charger View for individual unit tracking, plus actionable business recommendations
                 </p>
               </div>
             </div>

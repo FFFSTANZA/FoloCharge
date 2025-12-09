@@ -6,7 +6,8 @@ import { SessionUpload } from '@/components/analytics/SessionUpload';
 import { AnalyticsSummaryCards } from '@/components/analytics/AnalyticsSummaryCards';
 import { SiteAnalyticsTable } from '@/components/analytics/SiteAnalyticsTable';
 import { ChargerAnalyticsTable } from '@/components/analytics/ChargerAnalyticsTable';
-import { RecommendationsList } from '@/components/analytics/RecommendationsList';
+import { RecommendationsModal } from '@/components/analytics/RecommendationsModal';
+import { Button } from '@/components/ui/button';
 import { parseSessionFile } from '@/utils/sessionParser';
 import { 
   calculateSiteMetrics, 
@@ -21,6 +22,7 @@ import {
   Recommendation,
   AnalyticsSummary 
 } from '@/types/analytics';
+import { FileText } from 'lucide-react';
 
 export default function Analyzer() {
   const location = useLocation();
@@ -30,12 +32,13 @@ export default function Analyzer() {
   const [chargerMetrics, setChargerMetrics] = useState<ChargerMetrics[]>([]);
   const [recommendations, setRecommendations] = useState<Recommendation[]>([]);
   const [summary, setSummary] = useState<AnalyticsSummary | null>(null);
+  const [showRecommendations, setShowRecommendations] = useState(false);
   const { toast } = useToast();
 
   // Determine active tab based on route
   const getActiveTab = () => {
-    if (location.pathname === '/charger-analytics') return 'chargers';
-    return 'sites'; // default for /site-analytics
+    if (location.pathname === '/performance-analytics') return 'chargers';
+    return 'sites'; // default
   };
 
   const handleFileSelect = async (file: File) => {
@@ -76,13 +79,11 @@ export default function Analyzer() {
 
   // Page title based on route
   const getPageTitle = () => {
-    if (location.pathname === '/charger-analytics') return 'Charger Analytics';
-    return 'Site Analytics';
+    return 'Performance Analytics';
   };
 
   const getPageDescription = () => {
-    if (location.pathname === '/charger-analytics') return 'Individual charger performance and classification';
-    return 'Multi-site revenue and utilization analysis';
+    return 'Multi-site revenue analysis and individual charger performance tracking';
   };
 
   return (
@@ -107,22 +108,25 @@ export default function Analyzer() {
       {summary && (
         <>
           <section className="animate-slide-up">
-            <h2 className="text-xl font-semibold mb-4">Overview</h2>
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-xl font-semibold">Overview</h2>
+              {recommendations.length > 0 && (
+                <Button
+                  onClick={() => setShowRecommendations(true)}
+                  className="gap-2"
+                >
+                  <FileText className="h-4 w-4" />
+                  View Recommendations ({recommendations.length})
+                </Button>
+              )}
+            </div>
             <AnalyticsSummaryCards summary={summary} />
           </section>
 
           <Tabs value={getActiveTab()} className="w-full animate-slide-up" style={{ animationDelay: '0.2s' }}>
-            <TabsList className="grid w-full grid-cols-3">
-              <TabsTrigger value="sites">Site Analytics</TabsTrigger>
-              <TabsTrigger value="chargers">Charger Analytics</TabsTrigger>
-              <TabsTrigger value="recommendations">
-                Recommendations
-                {recommendations.length > 0 && (
-                  <span className="ml-2 bg-primary text-primary-foreground text-xs px-2 py-0.5 rounded-full">
-                    {recommendations.length}
-                  </span>
-                )}
-              </TabsTrigger>
+            <TabsList className="grid w-full grid-cols-2">
+              <TabsTrigger value="sites">Site View</TabsTrigger>
+              <TabsTrigger value="chargers">Charger View</TabsTrigger>
             </TabsList>
 
             <TabsContent value="sites" className="mt-6 animate-slide-up">
@@ -132,11 +136,14 @@ export default function Analyzer() {
             <TabsContent value="chargers" className="mt-6 animate-slide-up">
               <ChargerAnalyticsTable chargers={chargerMetrics} />
             </TabsContent>
-
-            <TabsContent value="recommendations" className="mt-6 animate-slide-up">
-              <RecommendationsList recommendations={recommendations} />
-            </TabsContent>
           </Tabs>
+
+          {/* Recommendations Modal */}
+          <RecommendationsModal
+            open={showRecommendations}
+            onOpenChange={setShowRecommendations}
+            recommendations={recommendations}
+          />
         </>
       )}
 

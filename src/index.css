@@ -12,7 +12,7 @@ All colors MUST be HSL.
     --radius: 0.5rem;
     
     /* Premium FoloCharge Theme - Light Mode */
-    --background: 0 0% 100%;
+    --background: 220 13% 96%;
     --foreground: 0 0% 4%;
     --card: 0 0% 100%;
     --card-foreground: 0 0% 4%;
@@ -55,10 +55,10 @@ All colors MUST be HSL.
     --chart-4: 0 84% 60%;
     --chart-5: 280 65% 60%;
     
-    /* Sidebar */
-    --sidebar: 0 0% 4%;
-    --sidebar-foreground: 0 0% 100%;
-    --sidebar-hover: 211 100% 50%;
+    /* Sidebar - Graphite Grey */
+    --sidebar: 0 0% 10%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-hover: 0 0% 15%;
   }
 
   .dark {
@@ -106,10 +106,10 @@ All colors MUST be HSL.
     --chart-4: 0 84% 60%;
     --chart-5: 280 65% 60%;
     
-    /* Sidebar */
-    --sidebar: 0 0% 4%;
-    --sidebar-foreground: 0 0% 100%;
-    --sidebar-hover: 211 100% 50%;
+    /* Sidebar - Graphite Grey */
+    --sidebar: 0 0% 10%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-hover: 0 0% 15%;
   }
 }
 

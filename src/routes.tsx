@@ -38,14 +38,8 @@ const routes: RouteConfig[] = [
     visible: true
   },
   {
-    name: 'Site Analytics',
-    path: '/site-analytics',
-    component: Analyzer,
-    visible: true
-  },
-  {
-    name: 'Charger Analytics',
-    path: '/charger-analytics',
+    name: 'Performance Analytics',
+    path: '/performance-analytics',
     component: Analyzer,
     visible: true
   },

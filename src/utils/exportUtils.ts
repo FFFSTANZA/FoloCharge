@@ -133,3 +133,80 @@ export function exportToCSV(faults: FaultAnalysis[], costParams: CostParameters)
   link.click();
   document.body.removeChild(link);
 }
+
+export function exportRecommendationsToPDF(recommendations: any[]): void {
+  const doc = new jsPDF();
+
+  doc.setFontSize(20);
+  doc.text('FoloCharge Business Recommendations', 14, 20);
+
+  doc.setFontSize(10);
+  doc.text(`Generated: ${new Date().toLocaleString()}`, 14, 28);
+
+  doc.setFontSize(14);
+  doc.text('Summary', 14, 40);
+
+  doc.setFontSize(10);
+  doc.text(`Total Recommendations: ${recommendations.length}`, 14, 48);
+  doc.text(`High Priority: ${recommendations.filter(r => r.severity === 'high').length}`, 14, 54);
+  doc.text(`Medium Priority: ${recommendations.filter(r => r.severity === 'medium').length}`, 14, 60);
+  doc.text(`Low Priority: ${recommendations.filter(r => r.severity === 'low').length}`, 14, 66);
+
+  autoTable(doc, {
+    startY: 75,
+    head: [['Priority', 'Site', 'Charger', 'Title', 'Issue', 'Impact', 'Action']],
+    body: recommendations.map(rec => [
+      rec.severity.toUpperCase(),
+      rec.siteId,
+      rec.chargerId || 'N/A',
+      rec.title,
+      rec.description,
+      rec.impact,
+      rec.action
+    ]),
+    styles: { fontSize: 8 },
+    headStyles: { fillColor: [37, 99, 235] },
+    columnStyles: {
+      0: { cellWidth: 20 },
+      1: { cellWidth: 25 },
+      2: { cellWidth: 25 },
+      3: { cellWidth: 30 },
+      4: { cellWidth: 30 },
+      5: { cellWidth: 30 },
+      6: { cellWidth: 30 }
+    }
+  });
+
+  doc.save(`folocharge-recommendations-${Date.now()}.pdf`);
+}
+
+export function exportRecommendationsToCSV(recommendations: any[]): void {
+  const headers = ['Priority', 'Site', 'Charger', 'Title', 'Issue', 'Impact', 'Recommended Action'];
+  const rows = recommendations.map(rec => [
+    rec.severity.toUpperCase(),
+    rec.siteId,
+    rec.chargerId || 'N/A',
+    rec.title,
+    rec.description,
+    rec.impact,
+    rec.action
+  ]);
+
+  const csvContent = [
+    headers.join(','),
+    ...rows.map(row => row.map(cell => `"${cell}"`).join(','))
+  ].join('\n');
+
+  const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+  const link = document.createElement('a');
+  const url = URL.createObjectURL(blob);
+
+  link.setAttribute('href', url);
+  link.setAttribute('download', `folocharge-recommendations-${Date.now()}.csv`);
+  link.style.visibility = 'hidden';
+
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+

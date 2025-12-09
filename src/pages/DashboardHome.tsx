@@ -140,7 +140,7 @@ export default function DashboardHome() {
                 </div>
               </div>
             ))}
-            <Link to="/site-analytics">
+            <Link to="/performance-analytics">
               <Button variant="outline" className="w-full mt-2">
                 View All Sites
               </Button>
@@ -226,7 +226,7 @@ export default function DashboardHome() {
               Upload Fault Logs
             </Button>
           </Link>
-          <Link to="/site-analytics">
+          <Link to="/performance-analytics">
             <Button variant="outline" className="gap-2">
               <BarChart3 className="h-4 w-4" />
               Upload Session Data

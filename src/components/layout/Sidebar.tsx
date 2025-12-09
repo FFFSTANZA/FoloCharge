@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Home, Activity, DollarSign, Zap, BarChart3, Plug, HelpCircle, Info } from 'lucide-react';
+import { Home, Activity, DollarSign, Zap, BarChart3, HelpCircle, Info } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import {
   Tooltip,
@@ -41,16 +41,10 @@ const navItems: NavItem[] = [
     description: 'Identify at-risk chargers before failure'
   },
   {
-    title: 'Site Analytics',
-    href: '/site-analytics',
+    title: 'Performance Analytics',
+    href: '/performance-analytics',
     icon: BarChart3,
-    description: 'Multi-site performance metrics'
-  },
-  {
-    title: 'Charger Analytics',
-    href: '/charger-analytics',
-    icon: Plug,
-    description: 'Individual charger performance'
+    description: 'Site and charger performance metrics'
   },
 ];
 
@@ -89,7 +83,7 @@ export function Sidebar() {
                         'flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-smooth',
                         isActive
                           ? 'bg-primary text-primary-foreground shadow-premium'
-                          : 'text-sidebar-foreground hover:bg-primary/10 hover:text-primary'
+                          : 'text-sidebar-foreground hover:bg-sidebar-hover hover:text-sidebar-foreground'
                       )}
                     >
                       <Icon className="h-5 w-5 flex-shrink-0" />
@@ -109,14 +103,14 @@ export function Sidebar() {
         <div className="border-t border-border/50 p-4 space-y-1">
           <Link
             to="/help"
-            className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-sidebar-foreground hover:bg-primary/10 hover:text-primary transition-smooth"
+            className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-sidebar-foreground hover:bg-sidebar-hover transition-smooth"
           >
             <HelpCircle className="h-4 w-4" />
             <span>Help & Documentation</span>
           </Link>
           <Link
             to="/about"
-            className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-sidebar-foreground hover:bg-primary/10 hover:text-primary transition-smooth"
+            className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-sidebar-foreground hover:bg-sidebar-hover transition-smooth"
           >
             <Info className="h-4 w-4" />
             <span>About FoloCharge</span>
