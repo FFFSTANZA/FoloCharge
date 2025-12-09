@@ -2,7 +2,9 @@ import { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Upload, FileText, DollarSign, Loader2, CheckCircle2, Database } from 'lucide-react';
+import { Switch } from '@/components/ui/switch';
+import { Label } from '@/components/ui/label';
+import { Upload, FileText, DollarSign, Loader2, CheckCircle2, Database, Zap } from 'lucide-react';
 import { useGlobalData } from '@/context/DataContext';
 import { useToast } from '@/hooks/use-toast';
 import { parseCSV, parseJSON, parseTXT } from '@/utils/logParser';
@@ -10,6 +12,10 @@ import { classifyFaults } from '@/utils/faultClassifier';
 import { parseSessionFile } from '@/utils/sessionParser';
 import { calculateSiteMetrics, calculateChargerMetrics } from '@/utils/analyticsEngine';
 import { calculateHealthData } from '@/utils/healthCalculator';
+import { ChunkReader, type ChunkProgress } from '@/utils/chunkReader';
+import { optimizeLogs, type OptimizationStats } from '@/utils/logOptimizer';
+import { OptimizationProgress } from './OptimizationProgress';
+import { PerformanceDashboard } from './PerformanceDashboard';
 
 export function UniversalUpload() {
   const {
@@ -30,6 +36,19 @@ export function UniversalUpload() {
   const [logsFile, setLogsFile] = useState<File | null>(null);
   const [revenueFile, setRevenueFile] = useState<File | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [useOptimizer, setUseOptimizer] = useState(true);
+  const [showProgress, setShowProgress] = useState(false);
+  const [progress, setProgress] = useState<ChunkProgress>({
+    stage: 'preparing',
+    currentChunk: 0,
+    totalChunks: 0,
+    bytesProcessed: 0,
+    totalBytes: 0,
+    percentComplete: 0,
+    estimatedTimeRemainingMs: 0,
+    linesProcessed: 0,
+  });
+  const [optimizationStats, setOptimizationStats] = useState<OptimizationStats | null>(null);
   const { toast } = useToast();
 
   const handleLogsFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,6 +57,7 @@ export function UniversalUpload() {
       setLogsFile(file);
       setIsLogsUploaded(false);
       setIsProcessed(false);
+      setOptimizationStats(null);
     }
   };
 
@@ -47,6 +67,80 @@ export function UniversalUpload() {
       setRevenueFile(file);
       setIsRevenueUploaded(false);
       setIsProcessed(false);
+    }
+  };
+
+  const processLogsWithOptimizer = async (file: File) => {
+    const fileName = file.name.toLowerCase();
+    const isLargeFile = file.size > 5 * 1024 * 1024; // 5MB threshold
+
+    if (isLargeFile && useOptimizer) {
+      // Use chunk reader for large files
+      setShowProgress(true);
+      
+      const reader = new ChunkReader(file, {
+        chunkSize: 2 * 1024 * 1024, // 2MB chunks
+        onProgress: (prog) => {
+          setProgress(prog);
+        },
+      });
+
+      try {
+        // Read all lines
+        setProgress(prev => ({ ...prev, stage: 'reading' }));
+        const lines = await reader.readInChunks();
+
+        // Parse lines
+        setProgress(prev => ({ ...prev, stage: 'processing' }));
+        let logEntries;
+        if (fileName.endsWith('.csv')) {
+          logEntries = parseCSV(lines.join('\n'));
+        } else if (fileName.endsWith('.json')) {
+          logEntries = parseJSON(lines.join('\n'));
+        } else {
+          logEntries = parseTXT(lines.join('\n'));
+        }
+
+        // Optimize logs
+        setProgress(prev => ({ ...prev, stage: 'optimizing' }));
+        const optimized = optimizeLogs(logEntries);
+        setOptimizationStats(optimized.stats);
+
+        // Classify faults
+        setProgress(prev => ({ ...prev, stage: 'classifying' }));
+        const faults = classifyFaults(optimized.entries);
+
+        setProgress(prev => ({ ...prev, stage: 'complete' }));
+        
+        // Small delay to show complete state
+        await new Promise(resolve => setTimeout(resolve, 500));
+        setShowProgress(false);
+
+        return faults;
+      } catch (error) {
+        setShowProgress(false);
+        throw error;
+      }
+    } else {
+      // Standard processing for small files
+      const text = await file.text();
+      let logEntries;
+      
+      if (fileName.endsWith('.csv')) {
+        logEntries = parseCSV(text);
+      } else if (fileName.endsWith('.json')) {
+        logEntries = parseJSON(text);
+      } else {
+        logEntries = parseTXT(text);
+      }
+
+      if (useOptimizer) {
+        const optimized = optimizeLogs(logEntries);
+        setOptimizationStats(optimized.stats);
+        return classifyFaults(optimized.entries);
+      } else {
+        return classifyFaults(logEntries);
+      }
     }
   };
 
@@ -65,20 +159,7 @@ export function UniversalUpload() {
     try {
       // Parse logs file
       if (logsFile) {
-        const text = await logsFile.text();
-        const fileName = logsFile.name.toLowerCase();
-        
-        let logEntries;
-        if (fileName.endsWith('.csv')) {
-          logEntries = parseCSV(text);
-        } else if (fileName.endsWith('.json')) {
-          logEntries = parseJSON(text);
-        } else {
-          logEntries = parseTXT(text);
-        }
-
-        // Classify faults from log entries
-        const faults = classifyFaults(logEntries);
+        const faults = await processLogsWithOptimizer(logsFile);
         setGlobalParsedLogsData(faults);
         setIsLogsUploaded(true);
 
@@ -104,7 +185,9 @@ export function UniversalUpload() {
 
       toast({
         title: 'Data Processed Successfully',
-        description: `All modules have been populated with your data`,
+        description: useOptimizer && optimizationStats 
+          ? `Optimized ${optimizationStats.totalLines} lines to ${optimizationStats.cleanedLines} (${optimizationStats.sizeReductionPercent}% reduction)`
+          : 'All modules have been populated with your data',
       });
     } catch (error) {
       toast({
@@ -138,19 +221,58 @@ export function UniversalUpload() {
   };
 
   return (
-    <Card className="shadow-premium">
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          <Database className="h-5 w-5 text-primary" />
-          Universal Data Import
-        </CardTitle>
-        <CardDescription>
-          Upload your data files once to populate all modules across the dashboard
-        </CardDescription>
-      </CardHeader>
-      <CardContent className="space-y-6">
-        {/* Upload Zones */}
-        <div className="grid gap-4 md:grid-cols-2">
+    <>
+      <OptimizationProgress open={showProgress} progress={progress} />
+      
+      <Card className="shadow-premium">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Database className="h-5 w-5 text-primary" />
+            Universal Data Import
+          </CardTitle>
+          <CardDescription>
+            Upload your data files once to populate all modules across the dashboard
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-6">
+          {/* Smart Optimizer Toggle */}
+          <div className="flex items-center justify-between p-4 bg-primary/5 border border-primary/20 rounded-lg">
+            <div className="flex items-center gap-3">
+              <Zap className="h-5 w-5 text-primary" />
+              <div>
+                <p className="font-medium">Smart Log Optimizer</p>
+                <p className="text-xs text-muted-foreground">
+                  Remove noise, duplicates, and compress large files (50-300MB)
+                </p>
+              </div>
+            </div>
+            <Switch
+              checked={useOptimizer}
+              onCheckedChange={setUseOptimizer}
+              disabled={isProcessing}
+            />
+          </div>
+
+          {/* File Size Info */}
+          {logsFile && (
+            <div className="flex items-center gap-2 p-3 bg-muted rounded-lg">
+              <FileText className="h-4 w-4 text-muted-foreground" />
+              <span className="text-sm">
+                <span className="font-medium">{logsFile.name}</span>
+                <span className="text-muted-foreground ml-2">
+                  ({(logsFile.size / (1024 * 1024)).toFixed(2)} MB)
+                </span>
+              </span>
+              {logsFile.size > 5 * 1024 * 1024 && (
+                <Badge variant="secondary" className="ml-auto">
+                  Large File
+                </Badge>
+              )}
+            </div>
+          )}
+
+          {/* Upload Zones */}
+          <div className="grid gap-4 md:grid-cols-2">
           {/* Charger Logs Upload */}
           <div className="space-y-3">
             <div className="flex items-center justify-between">
@@ -289,5 +411,13 @@ export function UniversalUpload() {
         )}
       </CardContent>
     </Card>
+
+    {/* Performance Dashboard */}
+    {optimizationStats && (
+      <div className="mt-6">
+        <PerformanceDashboard stats={optimizationStats} />
+      </div>
+    )}
+  </>
   );
 }
