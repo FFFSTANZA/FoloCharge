@@ -1,46 +1,123 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { Menu, X, Zap, ChevronDown } from "lucide-react";
 import routes from "../../routes";
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
-const Header: React.FC = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+const Header = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
   const navigation = routes.filter((route) => route.visible !== false);
 
-  return (
-    <header className="bg-white shadow-md sticky top-0 z-10">
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16">
-          <div className="flex items-center">
-            <Link to="/" className="flex-shrink-0 flex items-center">
-              {/* Please replace with your website logo */}
-              <img
-                className="h-8 w-auto"
-                src={`https://miaoda-site-img.cdn.bcebos.com/placeholder/code_logo_default.png`}
-                alt="Website logo"
-              />
-              {/* Please replace with your website name */}
-              <span className="ml-2 text-xl font-bold text-blue-600">
-                Website Name
-              </span>
-            </Link>
-          </div>
+  const isActive = (path: string) => location.pathname === path;
 
-          {/* When there's only one page, you can remove the entire navigation section */}
-          <div className="hidden md:flex items-center space-x-8">
+  return (
+    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex h-16 items-center justify-between">
+          {/* Logo Section */}
+          <Link 
+            to="/" 
+            className="flex items-center gap-2 group"
+          >
+            <div className="relative">
+              <div className="absolute inset-0 bg-primary/20 blur-xl rounded-full group-hover:bg-primary/30 transition-all duration-300" />
+              <div className="relative h-10 w-10 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-105">
+                <Zap className="h-6 w-6 text-white" fill="white" />
+              </div>
+            </div>
+            <div className="flex flex-col">
+              <span className="text-xl font-bold bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent">
+                FoloCharge
+              </span>
+              <span className="text-[10px] text-muted-foreground font-medium tracking-wider">
+                FAULT DIAGNOSER
+              </span>
+            </div>
+          </Link>
+
+          {/* Desktop Navigation */}
+          <div className="hidden lg:flex items-center gap-1">
             {navigation.map((item) => (
               <Link
                 key={item.path}
                 to={item.path}
-                className={`px-3 py-2 text-base font-medium rounded-md ${
-                  location.pathname === item.path
-                    ? "text-blue-600 bg-blue-50"
-                    : "text-gray-700 hover:text-blue-600 hover:bg-gray-50"
-                } transition duration-300`}
+                className={`
+                  relative px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200
+                  ${isActive(item.path)
+                    ? "text-primary"
+                    : "text-muted-foreground hover:text-foreground"
+                  }
+                `}
               >
-                {item.name}
+                {isActive(item.path) && (
+                  <span className="absolute inset-0 bg-primary/10 rounded-lg" />
+                )}
+                <span className="relative">{item.name}</span>
+                {isActive(item.path) && (
+                  <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-8 h-0.5 bg-primary rounded-full" />
+                )}
               </Link>
             ))}
+          </div>
+
+          {/* Desktop Actions */}
+          <div className="hidden lg:flex items-center gap-3">
+            <Button
+              variant="ghost"
+              size="sm"
+              className="text-muted-foreground hover:text-foreground"
+              asChild
+            >
+              <Link to="/help">Help</Link>
+            </Button>
+            <Button
+              size="sm"
+              className="bg-gradient-to-r from-primary to-accent hover:opacity-90 transition-opacity shadow-lg"
+              asChild
+            >
+              <Link to="/about">About</Link>
+            </Button>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <div className="lg:hidden flex items-center gap-2">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="sm" className="gap-1">
+                  Menu
+                  <ChevronDown className="h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-48">
+                {navigation.map((item) => (
+                  <DropdownMenuItem key={item.path} asChild>
+                    <Link
+                      to={item.path}
+                      className={`w-full ${isActive(item.path) ? "text-primary font-medium" : ""}`}
+                    >
+                      {item.name}
+                    </Link>
+                  </DropdownMenuItem>
+                ))}
+                <DropdownMenuItem asChild>
+                  <Link to="/help" className="w-full">
+                    Help
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/about" className="w-full">
+                    About
+                  </Link>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </div>
       </nav>

@@ -8,9 +8,15 @@ import routes from './routes';
 const App: React.FC = () => {
   return (
     <DataProvider>
-      <div className="flex min-h-screen">
+      <div className="flex min-h-screen relative">
+        {/* Premium Background Pattern */}
+        <div className="fixed inset-0 -z-10 bg-background">
+          <div className="absolute inset-0 bg-gradient-radial opacity-50" />
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
+        </div>
+
         <Sidebar />
-        <main className="flex-1 ml-64 p-8 bg-background">
+        <main className="flex-1 ml-64 p-8">
           <div className="mx-auto max-w-7xl">
             <Routes>
               {routes.map((route, index) => {
