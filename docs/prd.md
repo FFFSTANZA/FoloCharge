@@ -11,8 +11,7 @@ A premium, enterprise-level SaaS platform designed for Indian EV charging statio
 - **Multi-Site Revenue Analyzer**: Comprehensive site and charger performance analytics
 
 ### 1.3 Tagline
-Smarter EV Operations for India — No Setup, Just Upload.
-
+Smarter EV Operations for India — No Setup, Just Upload.\n
 ### 1.4 Target Users
 EV charging station owners, operators, and decision-makers in the Indian market\n
 ---
@@ -26,7 +25,7 @@ EV charging station owners, operators, and decision-makers in the Indian market\
 - 💸 Cost Analysis
 - ⚡ Predictive Failure
 - 📊 Site Analytics
-- 🔌 Charger Analytics
+- 🔌Charger Analytics
 \n**Footer Section**
 - Help & Documentation
 - About FoloCharge
@@ -39,8 +38,7 @@ EV charging station owners, operators, and decision-makers in the Indian market\
 - Smooth transitions between sections
 
 ---
-
-## 3. Dashboard Home (Executive Summary)
+\n## 3. Dashboard Home (Executive Summary)
 
 ### 3.1 Top Widgets (Large Cards)
 Four primary metric cards displaying:
@@ -48,12 +46,12 @@ Four primary metric cards displaying:
 - **Estimated Downtime Loss**: INR amount for today and current month
 - **Highest-Earning Sites**: Top 3 sites with revenue figures
 - **Charger Risk Scores**: Count of chargers in High and Critical risk categories
-\n### 3.2 Secondary Widgets
+
+### 3.2 Secondary Widgets
 - **Usage Trend Graph**: Line chart showing last 7 days activity
 - **Fault Category Distribution**: Pie chart with fault type breakdown
 - **Sites Needing Immediate Attention**: Alert list with actionable items
-
-### 3.3 Widget Design Requirements
+\n### 3.3 Widget Design Requirements
 - Color-coded by severity and status
 - Bold typography for key numbers
 - Subtle animations: fade-in on load, slide-up transitions, hover shadows
@@ -64,14 +62,14 @@ Four primary metric cards displaying:
 \n## 4. Fault Diagnosis Module
 
 ### 4.1 Log Upload & Parsing
-- Support file formats: CSV, JSON, TXT
-- Drag-and-drop upload zone with hover state
+- Support file formats: CSV, JSON, TXT\n- Drag-and-drop upload zone with hover state
 - 'Load Indian Sample Data' button for instant testing
 - Auto-extract key fields: errorCode, timestamp, connectorId, meterValue, temperature, voltage/current, OCPP status, transactionStopReason
 
 ### 4.2 Fault Classification Engine
 Rule-based categorization into11 fault types:
-- Overcurrent\n- Overvoltage\n- Low grid voltage
+- Overcurrent\n- Overvoltage
+- Low grid voltage
 - Overheating
 - BMS communication mismatch
 - OCPP network disconnect
@@ -87,7 +85,8 @@ For each detected fault:
 - Impact on charging uptime
 - Severity badge (Green: Normal, Orange: Warning, Red: Critical, Blue: Info)
 - Resolution guidance with action type (Electrician required / Vendor support / Simple reset)
-\n### 4.4 Detailed Fault Table
+
+### 4.4 Detailed Fault Table
 - Sortable and filterable columns
 - Collapsible rows for detailed information
 - Risk badges integrated for at-risk chargers
@@ -100,8 +99,7 @@ For each detected fault:
 ### 5.1 Downtime Cost Calculator (INR)
 - Formula: avg_sessions_per_day × avg_ticket_size_in_INR × (downtime_hours/24)
 - Default parameters (user-editable with inline validation):
-  - Average Session Value: ₹120
-  - Average Sessions per Day: 14
+  - Average Session Value: ₹120\n  - Average Sessions per Day: 14
 \n### 5.2 Display Metrics
 - Revenue lost today\n- Revenue lost this month
 - Top 5 costliest faults ranking with bar chart
@@ -128,10 +126,9 @@ Trigger alerts based on:
 
 ### 6.2 Risk Classification
 - ⚠️ **Medium Failure Risk** (Orange badge): Single pattern, moderate frequency
-- 🔥 **High Failure Risk** (Orange badge): Multiple patterns or high frequency
+-🔥 **High Failure Risk** (Orange badge): Multiple patterns or high frequency
 - 🚨 **Critical — Failure Imminent** (Red badge): Severe patterns with very high frequency
-
-### 6.3 Charger Health Score
+\n### 6.3 Charger Health Score
 - 0-100 scale displayed as circular progress indicator with color gradient
 - Score ranges:\n  - 80-100: Healthy (Green)
   - 60-79: Monitor Closely (Yellow)
@@ -147,7 +144,8 @@ Trigger alerts based on:
 
 ### 6.5 Detailed Risk Table
 For each at-risk charger:
-- Charger ID / Connector ID\n- Risk badge with color coding
+- Charger ID / Connector ID
+- Risk badge with color coding
 - Health score with circular indicator
 - Detected patterns list
 - Explanation and recommended action
@@ -160,10 +158,11 @@ For each at-risk charger:
 - Pattern timeline visualization
 - Expandable sections for technical details
 - Action buttons for maintenance scheduling
-\n---
 
-## 7. Site Analytics Module
-\n### 7.1 CSV Upload\n- Single CSV file upload with drag-and-drop support
+---
+\n## 7. Site Analytics Module
+
+### 7.1 CSV Upload\n- Single CSV file upload with drag-and-drop support
 - Required fields: siteId, chargerId, connectorId, energy_kWh, sessionDurationMin, tariffINR, revenueINR, startTime, stopTime
 \n### 7.2 Site-Level Metrics
 For each site:
@@ -184,20 +183,18 @@ For each site:
 ### 7.4 Insights & Recommendations
 Rule-based business suggestions:
 - Tariff adjustment recommendations
-- Charger relocation alerts for low footfall
-- Capacity expansion suggestions for high-demand sites
+- Charger relocation alerts for low footfall\n- Capacity expansion suggestions for high-demand sites
 - Grid issue warnings for low energy output
 
 ---
-\n## 8. Charger Analytics Module
 
-### 8.1 Charger-Level Performance Analysis
+## 8. Charger Analytics Module
+\n### 8.1 Charger-Level Performance Analysis
 Categorization:\n- **Good Performer** (Green badge): High utilization and revenue
 - **Low Performer** (Yellow badge): Below-average metrics
 - **Dead Chargers** (Red badge): 0–1 sessions per day
 - **Underutilized Chargers** (Orange badge): Less than 10% usage
-
-### 8.2 Charger Performance Table
+\n### 8.2 Charger Performance Table
 - Sortable and filterable columns
 - Performance badge for each charger
 - Drill-down capability for connector-level data
@@ -222,8 +219,7 @@ One-line definitions for Indian EV terms:
 - **Session**: Single charging transaction from start to stop
 
 ### 9.2 Help Section
-- Quick start guide
-- Module-specific documentation
+- Quick start guide\n- Module-specific documentation
 - FAQ section
 - Sample data download links
 - Contact support information
@@ -237,8 +233,7 @@ One-line definitions for Indian EV terms:
 - CSV: Raw data tables
 - Excel (XLSX): Structured workbooks with multiple sheets
 \n### 10.2 Exportable Content
-- Fault analysis reports
-- Cost analysis summaries
+- Fault analysis reports\n- Cost analysis summaries
 - Predictive failure alerts
 - Site performance reports
 - Charger analytics data
@@ -266,7 +261,7 @@ Upload → Process → Show Insights → Export
 
 ### 11.3 Runtime Error Fix
 - Issue: 'Cannot read properties of null (reading useRef)' in BrowserRouter
-- Solution: Ensure React context is properly initialized before BrowserRouter renders. Verify React and React-DOM versions compatibility (both18.3.1). Wrap BrowserRouter in proper React root element with no null references in parent components.
+- Solution: Ensure React context is properly initialized before BrowserRouter renders. Verify React and React-DOM versions compatibility (both 18.3.1). Wrap BrowserRouter in proper React root element with no null references in parent components.
 - Implementation: Use ReactDOM.createRoot correctly and ensure BrowserRouter renders after React context initialization.
 
 ---
@@ -277,9 +272,9 @@ Upload → Process → Show Insights → Export
 - **Name**: FoloCharge
 - **Logo**: Simple electric bolt + F text combination
 - **Footer Credit**: Built by Folonite\n\n### 12.2 Brand Application
-Consistent branding across:
-- Page headers
-- Tooltips\n- Buttons
+Consistent branding across:\n- Page headers
+- Tooltips
+- Buttons
 - Loading screens
 - Export documents
 - Error messages
@@ -341,7 +336,7 @@ Consistent branding across:
 - Comprehensive iconography\n- Contextual help tooltips
 
 ### 14.3 Comprehensive Analytics
-- Fault diagnosis with11 fault types
+- Fault diagnosis with 11 fault types
 - INR-based cost analysis
 - Predictive failure detection with health scoring
 - Multi-site revenue and utilization analysis
@@ -353,8 +348,8 @@ Consistent branding across:
 - Visual charts and graphs included
 - Batch export capabilities
 \n### 14.5 No-Setup Operation
-- No login required\n- No database storage
-- Client-side processing only
+- No login required
+- No database storage\n- Client-side processing only
 - Session-based data handling
 - Instant-use tool with sample data
 
@@ -365,3 +360,113 @@ Consistent branding across:
 - **Built by**: Folonite
 - **Platform**: Web-based SaaS
 - **Target Market**: Indian EV charging station operators
+\n---
+
+## 16. Vendor-Agnostic Log Format Detection (Autodetect Engine)
+
+### 16.1 Purpose
+Automatically detect and normalize log formats from ANY EV charger vendor in India without requiring manual user configuration.
+
+### 16.2 Supported Vendors & Formats
+The autodetection engine supports logs from:
+- Delta\n- ABB
+- Exicom
+- Servotech
+- Fortum
+- Statiq
+- Tata Power style reports
+- Charge+Zone
+- OCPP 1.6J Standard logs
+- Custom OEM diagnostic files
+- JSON-based telemetry dumps
+- TXT console dumps
+
+### 16.3 Format Autodetection Logic
+\n#### 16.3.1 File Structure Detection
+- **CSV Header Matching**: Identify columns like eventType, meterValue, evseId\n- **JSON Key Recognition**: Detect keys such as connectorId, measurand, reason
+- **TXT Line Format Parsing**: Recognize patterns like [2024-12-0114:00:01] ERROR: ...
+\n#### 16.3.2 Vendor Signature Recognition
+Identify unique vendor identifiers:
+- 'EXICOM-CP'\n- 'ABB_ERR_'\n- 'DELTA:OCPP'\n- 'CHARGEZONE LOG BLOCK'
+- 'STQ_EVT'\n\n#### 16.3.3OCPP Event Pattern Recognition
+Recognize standard OCPP events:
+- BootNotification
+- MeterValues
+- StatusNotification
+- Heartbeat
+- StartTransaction
+- StopTransaction\n\n### 16.4 Auto-Mapping Fields
+\n#### 16.4.1 Standard FoloCharge Fields
+- timestamp
+- errorCode
+- connectorId\n- status
+- voltage
+- current
+- meterValue
+- temperature
+- vendorErrorString
+- restartCount
+\n#### 16.4.2Vendor Field Mapping Examples
+- Err_Code → errorCode
+- EVSE_ID → connectorId
+- Temp_C → temperature
+- Volt_R / Volt_S / Volt_T → voltage
+\n### 16.5 Validation Layer
+\n#### 16.5.1 Data Quality Checks
+Detect and handle:\n- Missing timestamps
+- Corrupted timestamps
+- Invalid connector numbers
+- Empty lines
+- Broken JSON structures
+\n#### 16.5.2 Validation Warnings
+Display user-friendly messages:
+- '32 invalid entries were fixed automatically.'
+- 'Timestamp format normalized from vendor-specific to ISO 8601.'
+- 'Missing connector IDs assigned default values.'
+
+### 16.6 UI Integration
+
+#### 16.6.1 Module Integration
+Autodetection applies to:
+- Fault Diagnoser
+- Predictive Failure\n- Cost Analysis
+\n#### 16.6.2 Detection Banner
+Display small banner after file upload:
+- 'Vendor detected: ABB (OCPP 1.6J Pattern)'
+- 'Logs normalized for analysis.'
+- Color-coded by detection confidence (Green: High confidence, Yellow: Partial match, Orange: Manual review suggested)
+
+#### 16.6.3 Detection Details Panel (Optional)
+Collapsible panel showing:
+- Detected vendor name
+- Log format type
+- Number of entries processed
+- Number of entries corrected
+- Field mapping summary
+
+### 16.7 Processing Workflow
+1. User uploads log file (CSV/JSON/TXT)
+2. Autodetection engine analyzes file structure and content
+3. Vendor signature identified
+4. Fields auto-mapped to standard format
+5. Validation layer corrects data quality issues
+6. Detection banner displayed
+7. Normalized data passed to analysis modules
+8. User proceeds with fault diagnosis, cost analysis, or predictive failure detection
+
+### 16.8 Technical Implementation
+- Client-side processing only (no backend required)
+- Pattern matching algorithms for vendor detection
+- Field mapping dictionary for all supported vendors
+- Validation rules engine for data quality checks
+- Real-time processing with progress indicator
+- Error handling for unsupported formats with user guidance
+
+### 16.9 Deliverables
+- Vendor autodetection engine
+- Auto-field mapping system
+- Data normalizer
+- Validation layer with auto-correction
+- Unified output format for all modules
+- Detection banner UI component
+- User-friendly error messages for unsupported formats

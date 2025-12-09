@@ -14,8 +14,10 @@ import { calculateSiteMetrics, calculateChargerMetrics } from '@/utils/analytics
 import { calculateHealthData } from '@/utils/healthCalculator';
 import { ChunkReader, type ChunkProgress } from '@/utils/chunkReader';
 import { optimizeLogs, type OptimizationStats } from '@/utils/logOptimizer';
+import { normalizeLogFile, type NormalizationResult } from '@/utils/logNormalizer';
 import { OptimizationProgress } from './OptimizationProgress';
 import { PerformanceDashboard } from './PerformanceDashboard';
+import { VendorDetectionBanner } from './VendorDetectionBanner';
 
 export function UniversalUpload() {
   const {
@@ -49,6 +51,7 @@ export function UniversalUpload() {
     linesProcessed: 0,
   });
   const [optimizationStats, setOptimizationStats] = useState<OptimizationStats | null>(null);
+  const [normalizationResult, setNormalizationResult] = useState<NormalizationResult | null>(null);
   const { toast } = useToast();
 
   const handleLogsFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -58,6 +61,7 @@ export function UniversalUpload() {
       setIsLogsUploaded(false);
       setIsProcessed(false);
       setOptimizationStats(null);
+      setNormalizationResult(null);
     }
   };
 
@@ -73,6 +77,17 @@ export function UniversalUpload() {
   const processLogsWithOptimizer = async (file: File) => {
     const fileName = file.name.toLowerCase();
     const isLargeFile = file.size > 5 * 1024 * 1024; // 5MB threshold
+
+    // First, perform vendor detection
+    const text = await file.text();
+    const normalization = await normalizeLogFile(text, file.name);
+    setNormalizationResult(normalization);
+
+    // Show vendor detection toast
+    toast({
+      title: 'Vendor Detected',
+      description: `${normalization.banner.vendor} (${normalization.banner.format}) - ${normalization.banner.entriesProcessed} entries normalized`,
+    });
 
     if (isLargeFile && useOptimizer) {
       // Use chunk reader for large files
@@ -123,7 +138,6 @@ export function UniversalUpload() {
       }
     } else {
       // Standard processing for small files
-      const text = await file.text();
       let logEntries;
       
       if (fileName.endsWith('.csv')) {
@@ -411,6 +425,16 @@ export function UniversalUpload() {
         )}
       </CardContent>
     </Card>
+
+    {/* Vendor Detection Banner */}
+    {normalizationResult && (
+      <div className="mt-6">
+        <VendorDetectionBanner 
+          banner={normalizationResult.banner}
+          validationWarnings={normalizationResult.validationSummary.warnings}
+        />
+      </div>
+    )}
 
     {/* Performance Dashboard */}
     {optimizationStats && (
