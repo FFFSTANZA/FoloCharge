@@ -210,3 +210,107 @@ export function exportRecommendationsToCSV(recommendations: any[]): void {
   document.body.removeChild(link);
 }
 
+
+export function exportFaultsToPDF(faults: FaultAnalysis[]): void {
+  const doc = new jsPDF();
+
+  doc.setFontSize(20);
+  doc.text('FoloCharge Fault Diagnosis Report', 14, 20);
+
+  doc.setFontSize(10);
+  doc.text(`Generated: ${new Date().toLocaleString()}`, 14, 28);
+
+  doc.setFontSize(14);
+  doc.text('Fault Summary', 14, 40);
+
+  doc.setFontSize(10);
+  doc.text(`Total Faults: ${faults.length}`, 14, 48);
+  doc.text(`High Severity: ${faults.filter(f => f.severity === 'High').length}`, 14, 54);
+  doc.text(`Medium Severity: ${faults.filter(f => f.severity === 'Medium').length}`, 14, 60);
+  doc.text(`Low Severity: ${faults.filter(f => f.severity === 'Low').length}`, 14, 66);
+
+  autoTable(doc, {
+    startY: 75,
+    head: [['Timestamp', 'Fault Type', 'Connector', 'Severity', 'Description']],
+    body: faults.map(f => [
+      new Date(f.timestamp).toLocaleString(),
+      f.faultType,
+      f.connectorId,
+      f.severity,
+      f.description
+    ]),
+    styles: { fontSize: 8 },
+    headStyles: { fillColor: [37, 99, 235] },
+  });
+
+  doc.save(`folocharge-faults-${Date.now()}.pdf`);
+}
+
+export function exportFaultsToCSV(faults: FaultAnalysis[]): void {
+  const headers = ['Timestamp', 'Fault Type', 'Connector', 'Severity', 'Description', 'Root Cause', 'Resolution'];
+  const rows = faults.map(f => [
+    new Date(f.timestamp).toLocaleString(),
+    f.faultType,
+    f.connectorId,
+    f.severity,
+    f.description,
+    f.rootCause,
+    f.resolution
+  ]);
+
+  const csvContent = [
+    headers.join(','),
+    ...rows.map(row => row.map(cell => `"${cell}"`).join(','))
+  ].join('\n');
+
+  const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+  const link = document.createElement('a');
+  const url = URL.createObjectURL(blob);
+
+  link.setAttribute('href', url);
+  link.setAttribute('download', `folocharge-faults-${Date.now()}.csv`);
+  link.style.visibility = 'hidden';
+
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+
+export function exportCostAnalysisToPDF(costData: any): void {
+  const doc = new jsPDF();
+
+  doc.setFontSize(20);
+  doc.text('FoloCharge Cost Analysis Report', 14, 20);
+
+  doc.setFontSize(10);
+  doc.text(`Generated: ${new Date().toLocaleString()}`, 14, 28);
+
+  doc.setFontSize(14);
+  doc.text('Revenue Impact Summary', 14, 40);
+
+  doc.setFontSize(10);
+  doc.text(`Total Downtime: ${costData.totalDowntime.toFixed(1)} hours`, 14, 48);
+  doc.text(`Daily Revenue Loss: ₹${costData.dailyLoss.toLocaleString('en-IN', { maximumFractionDigits: 0 })}`, 14, 54);
+  doc.text(`Monthly Revenue Loss: ₹${costData.monthlyLoss.toLocaleString('en-IN', { maximumFractionDigits: 0 })}`, 14, 60);
+  doc.text(`Avg Session Value: ₹${costData.avgSessionValue}`, 14, 66);
+  doc.text(`Avg Sessions/Day: ${costData.avgSessionsPerDay}`, 14, 72);
+
+  doc.setFontSize(14);
+  doc.text('Top 5 Costliest Fault Types', 14, 84);
+
+  autoTable(doc, {
+    startY: 90,
+    head: [['Rank', 'Fault Type', 'Count', 'Downtime (h)', 'Revenue Loss (₹)']],
+    body: costData.faultTypeCosts.map(([type, data]: [string, any], index: number) => [
+      `#${index + 1}`,
+      type,
+      data.count.toString(),
+      data.downtime.toFixed(1),
+      data.totalLoss.toLocaleString('en-IN', { maximumFractionDigits: 0 })
+    ]),
+    styles: { fontSize: 9 },
+    headStyles: { fillColor: [37, 99, 235] },
+  });
+
+  doc.save(`folocharge-cost-analysis-${Date.now()}.pdf`);
+}

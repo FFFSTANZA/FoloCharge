@@ -1,6 +1,8 @@
 import DashboardHome from './pages/DashboardHome';
-import Dashboard from './pages/Dashboard';
+import FaultDiagnosis from './pages/FaultDiagnosis';
+import CostAnalysis from './pages/CostAnalysis';
 import Analyzer from './pages/Analyzer';
+import PredictiveFailure from './pages/PredictiveFailure';
 import Help from './pages/Help';
 import About from './pages/About';
 import type { ComponentType } from 'react';
@@ -22,19 +24,19 @@ const routes: RouteConfig[] = [
   {
     name: 'Fault Diagnosis',
     path: '/fault-diagnosis',
-    component: Dashboard,
+    component: FaultDiagnosis,
     visible: true
   },
   {
     name: 'Cost Analysis',
     path: '/cost-analysis',
-    component: Dashboard,
+    component: CostAnalysis,
     visible: true
   },
   {
     name: 'Predictive Failure',
     path: '/predictive',
-    component: Dashboard,
+    component: PredictiveFailure,
     visible: true
   },
   {

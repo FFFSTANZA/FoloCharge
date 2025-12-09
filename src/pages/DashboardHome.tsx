@@ -3,6 +3,7 @@ import { Badge } from '@/components/ui/badge';
 import { Activity, DollarSign, TrendingUp, AlertTriangle, Zap, BarChart3 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
+import { UniversalUpload } from '@/components/upload/UniversalUpload';
 
 export default function DashboardHome() {
   // Mock data for demonstration
@@ -41,6 +42,9 @@ export default function DashboardHome() {
           Real-time insights into your EV charging operations
         </p>
       </div>
+
+      {/* Universal Upload Section */}
+      <UniversalUpload />
 
       {/* Top Widgets - Large Cards */}
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
