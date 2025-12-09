@@ -49,13 +49,16 @@ const App: React.FC = () => {
         <Navigation />
         <main className="flex-grow">
           <Routes>
-          {routes.map((route, index) => (
-            <Route
-              key={index}
-              path={route.path}
-              element={route.element}
-            />
-          ))}
+          {routes.map((route, index) => {
+            const Component = route.component;
+            return (
+              <Route
+                key={index}
+                path={route.path}
+                element={<Component />}
+              />
+            );
+          })}
           <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </main>

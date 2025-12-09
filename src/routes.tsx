@@ -1,11 +1,11 @@
 import Dashboard from './pages/Dashboard';
 import Analyzer from './pages/Analyzer';
-import type { ReactNode } from 'react';
+import type { ComponentType } from 'react';
 
 interface RouteConfig {
   name: string;
   path: string;
-  element: ReactNode;
+  component: ComponentType;
   visible?: boolean;
 }
 
@@ -13,13 +13,13 @@ const routes: RouteConfig[] = [
   {
     name: 'Fault Diagnoser',
     path: '/',
-    element: <Dashboard />,
+    component: Dashboard,
     visible: true
   },
   {
     name: 'Revenue Analyzer',
     path: '/analyzer',
-    element: <Analyzer />,
+    component: Analyzer,
     visible: true
   }
 ];
