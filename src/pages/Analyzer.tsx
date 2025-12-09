@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/hooks/use-toast';
 import { SessionUpload } from '@/components/analytics/SessionUpload';
@@ -22,6 +23,7 @@ import {
 } from '@/types/analytics';
 
 export default function Analyzer() {
+  const location = useLocation();
   const [isProcessing, setIsProcessing] = useState(false);
   const [sessions, setSessions] = useState<SessionData[]>([]);
   const [siteMetrics, setSiteMetrics] = useState<SiteMetrics[]>([]);
@@ -29,6 +31,12 @@ export default function Analyzer() {
   const [recommendations, setRecommendations] = useState<Recommendation[]>([]);
   const [summary, setSummary] = useState<AnalyticsSummary | null>(null);
   const { toast } = useToast();
+
+  // Determine active tab based on route
+  const getActiveTab = () => {
+    if (location.pathname === '/charger-analytics') return 'chargers';
+    return 'sites'; // default for /site-analytics
+  };
 
   const handleFileSelect = async (file: File) => {
     setIsProcessing(true);
@@ -66,65 +74,79 @@ export default function Analyzer() {
     }
   };
 
+  // Page title based on route
+  const getPageTitle = () => {
+    if (location.pathname === '/charger-analytics') return 'Charger Analytics';
+    return 'Site Analytics';
+  };
+
+  const getPageDescription = () => {
+    if (location.pathname === '/charger-analytics') return 'Individual charger performance and classification';
+    return 'Multi-site revenue and utilization analysis';
+  };
+
   return (
-    <div className="min-h-screen bg-background">
-      <header className="border-b bg-card">
-        <div className="container mx-auto px-4 py-6">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-3xl font-bold">FoloCharge Analyzer</h1>
-              <p className="text-muted-foreground mt-1">
-                Multi-Site Revenue & Utilization Analysis
-              </p>
-            </div>
+    <div className="space-y-8 animate-fade-in">
+      <div>
+        <h1 className="text-4xl font-bold tracking-tight">{getPageTitle()}</h1>
+        <p className="text-muted-foreground mt-2">{getPageDescription()}</p>
+      </div>
+
+      <section>
+        <div className="flex items-start justify-between mb-4">
+          <div>
+            <h2 className="text-xl font-semibold">Upload Session Data</h2>
+            <p className="text-sm text-muted-foreground mt-1">
+              Upload your charging session logs to analyze site performance and get recommendations
+            </p>
           </div>
         </div>
-      </header>
+        <SessionUpload onFileSelect={handleFileSelect} isProcessing={isProcessing} />
+      </section>
 
-      <main className="container mx-auto px-4 py-8">
-        <div className="space-y-8">
-          <section>
-            <div className="flex items-start justify-between mb-4">
-              <div>
-                <h2 className="text-xl font-semibold">Upload Session Data</h2>
-                <p className="text-sm text-muted-foreground mt-1">
-                  Upload your charging session logs to analyze site performance and get recommendations
-                </p>
-              </div>
-            </div>
-            <SessionUpload onFileSelect={handleFileSelect} isProcessing={isProcessing} />
+      {summary && (
+        <>
+          <section className="animate-slide-up">
+            <h2 className="text-xl font-semibold mb-4">Overview</h2>
+            <AnalyticsSummaryCards summary={summary} />
           </section>
 
-          {summary && (
-            <>
-              <section>
-                <h2 className="text-xl font-semibold mb-4">Overview</h2>
-                <AnalyticsSummaryCards summary={summary} />
-              </section>
+          <Tabs value={getActiveTab()} className="w-full animate-slide-up" style={{ animationDelay: '0.2s' }}>
+            <TabsList className="grid w-full grid-cols-3">
+              <TabsTrigger value="sites">Site Analytics</TabsTrigger>
+              <TabsTrigger value="chargers">Charger Analytics</TabsTrigger>
+              <TabsTrigger value="recommendations">
+                Recommendations
+                {recommendations.length > 0 && (
+                  <span className="ml-2 bg-primary text-primary-foreground text-xs px-2 py-0.5 rounded-full">
+                    {recommendations.length}
+                  </span>
+                )}
+              </TabsTrigger>
+            </TabsList>
 
-              <Tabs defaultValue="sites" className="w-full">
-                <TabsList className="grid w-full grid-cols-3">
-                  <TabsTrigger value="sites">Site Analytics</TabsTrigger>
-                  <TabsTrigger value="chargers">Charger Analytics</TabsTrigger>
-                  <TabsTrigger value="recommendations">Recommendations</TabsTrigger>
-                </TabsList>
+            <TabsContent value="sites" className="mt-6 animate-slide-up">
+              <SiteAnalyticsTable sites={siteMetrics} />
+            </TabsContent>
 
-                <TabsContent value="sites" className="mt-6">
-                  <SiteAnalyticsTable sites={siteMetrics} />
-                </TabsContent>
+            <TabsContent value="chargers" className="mt-6 animate-slide-up">
+              <ChargerAnalyticsTable chargers={chargerMetrics} />
+            </TabsContent>
 
-                <TabsContent value="chargers" className="mt-6">
-                  <ChargerAnalyticsTable chargers={chargerMetrics} />
-                </TabsContent>
+            <TabsContent value="recommendations" className="mt-6 animate-slide-up">
+              <RecommendationsList recommendations={recommendations} />
+            </TabsContent>
+          </Tabs>
+        </>
+      )}
 
-                <TabsContent value="recommendations" className="mt-6">
-                  <RecommendationsList recommendations={recommendations} />
-                </TabsContent>
-              </Tabs>
-            </>
-          )}
+      {!isProcessing && !summary && (
+        <div className="text-center py-12 animate-slide-up">
+          <p className="text-muted-foreground">
+            Upload session data to begin analysis
+          </p>
         </div>
-      </main>
+      )}
     </div>
   );
 }

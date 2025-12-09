@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { FileUpload } from '@/components/fault/FileUpload';
 import { FaultSummary } from '@/components/fault/FaultSummary';
@@ -17,6 +18,7 @@ import type { FaultAnalysis, CostParameters, CostAnalysis as CostAnalysisType } 
 import type { PredictiveAlert, ChargerHealth, PredictiveSummary } from '@/types/predictive';
 
 export default function Dashboard() {
+  const location = useLocation();
   const [isProcessing, setIsProcessing] = useState(false);
   const [faults, setFaults] = useState<FaultAnalysis[]>([]);
   const [costParams, setCostParams] = useState<CostParameters>({
@@ -41,6 +43,13 @@ export default function Dashboard() {
   });
 
   const { toast } = useToast();
+
+  // Determine active tab based on route
+  const getActiveTab = () => {
+    if (location.pathname === '/cost-analysis') return 'faults';
+    if (location.pathname === '/predictive') return 'predictive';
+    return 'faults'; // default for /fault-diagnosis
+  };
 
   // Update predictive analysis when faults or cost params change
   useEffect(() => {
@@ -116,122 +125,119 @@ export default function Dashboard() {
   const mediumSeverityCount = faults.filter(f => f.severity === 'Medium').length;
   const lowSeverityCount = faults.filter(f => f.severity === 'Low').length;
 
+  // Page title based on route
+  const getPageTitle = () => {
+    if (location.pathname === '/cost-analysis') return 'Cost Analysis';
+    if (location.pathname === '/predictive') return 'Predictive Failure Indicator';
+    return 'Fault Diagnosis';
+  };
+
+  const getPageDescription = () => {
+    if (location.pathname === '/cost-analysis') return 'Calculate revenue loss from charger downtime';
+    if (location.pathname === '/predictive') return 'Identify at-risk chargers before failure';
+    return 'Analyze charger failures and errors';
+  };
+
   return (
-    <div className="min-h-screen bg-background">
-      <header className="border-b bg-card">
-        <div className="container mx-auto px-4 py-6">
+    <div className="space-y-8 animate-fade-in">
+      <div>
+        <h1 className="text-4xl font-bold tracking-tight">{getPageTitle()}</h1>
+        <p className="text-muted-foreground mt-2">{getPageDescription()}</p>
+      </div>
+
+      <section>
+        <div className="flex items-start justify-between mb-4">
           <div>
-            <h1 className="text-3xl font-bold">Fault Diagnoser</h1>
-            <p className="text-muted-foreground mt-1">
-              Analyze charger failures and calculate revenue impact
+            <h2 className="text-xl font-semibold">Upload Log File</h2>
+            <p className="text-sm text-muted-foreground mt-1">
+              Start by uploading your charger logs or try our sample data
             </p>
           </div>
         </div>
-      </header>
+        <FileUpload onFileSelect={handleFileSelect} isProcessing={isProcessing} />
+      </section>
 
-      <main className="container mx-auto px-4 py-8">
-        <div className="space-y-8">
-          <section>
-            <div className="flex items-start justify-between mb-4">
-              <div>
-                <h2 className="text-xl font-semibold">Upload Log File</h2>
-                <p className="text-sm text-muted-foreground mt-1">
-                  Start by uploading your charger logs or try our sample data
-                </p>
-              </div>
-            </div>
-            <FileUpload onFileSelect={handleFileSelect} isProcessing={isProcessing} />
-          </section>
+      {faults.length > 0 && (
+        <Tabs value={getActiveTab()} className="w-full">
+          <TabsList className="grid w-full grid-cols-3">
+            <TabsTrigger value="faults">Fault Analysis</TabsTrigger>
+            <TabsTrigger value="predictive">
+              Predictive Alerts
+              {predictiveAlerts.length > 0 && (
+                <span className="ml-2 bg-destructive text-destructive-foreground text-xs px-2 py-0.5 rounded-full">
+                  {predictiveAlerts.length}
+                </span>
+              )}
+            </TabsTrigger>
+            <TabsTrigger value="health">Charger Health</TabsTrigger>
+          </TabsList>
 
-          {faults.length > 0 && (
-            <Tabs defaultValue="faults" className="w-full">
-              <TabsList className="grid w-full grid-cols-3">
-                <TabsTrigger value="faults">Fault Analysis</TabsTrigger>
-                <TabsTrigger value="predictive">
-                  Predictive Alerts
-                  {predictiveAlerts.length > 0 && (
-                    <span className="ml-2 bg-red-600 text-white text-xs px-2 py-0.5 rounded-full">
-                      {predictiveAlerts.length}
-                    </span>
-                  )}
-                </TabsTrigger>
-                <TabsTrigger value="health">Charger Health</TabsTrigger>
-              </TabsList>
+          <TabsContent value="faults" className="space-y-8 mt-6 animate-slide-up">
+            <section>
+              <h2 className="text-xl font-semibold mb-4">Fault Summary</h2>
+              <FaultSummary
+                totalFaults={faults.length}
+                highSeverity={highSeverityCount}
+                mediumSeverity={mediumSeverityCount}
+                lowSeverity={lowSeverityCount}
+              />
+            </section>
 
-              <TabsContent value="faults" className="space-y-8 mt-6">
-                <section>
-                  <h2 className="text-xl font-semibold mb-4">Fault Summary</h2>
-                  <FaultSummary
-                    totalFaults={faults.length}
-                    highSeverity={highSeverityCount}
-                    mediumSeverity={mediumSeverityCount}
-                    lowSeverity={lowSeverityCount}
-                  />
-                </section>
+            <section>
+              <h2 className="text-xl font-semibold mb-4">Cost Analysis</h2>
+              <CostAnalysis
+                costAnalysis={costAnalysis}
+                costParams={costParams}
+                onCostParamsChange={handleCostParamsChange}
+              />
+            </section>
 
-                <section>
-                  <h2 className="text-xl font-semibold mb-4">Cost Analysis</h2>
-                  <CostAnalysis
-                    costAnalysis={costAnalysis}
-                    costParams={costParams}
-                    onCostParamsChange={handleCostParamsChange}
-                  />
-                </section>
+            <section>
+              <h2 className="text-xl font-semibold mb-4">Detailed Analysis</h2>
+              <FaultTable faults={faults} />
+            </section>
 
-                <section>
-                  <h2 className="text-xl font-semibold mb-4">Detailed Analysis</h2>
-                  <FaultTable faults={faults} />
-                </section>
+            <section>
+              <h2 className="text-xl font-semibold mb-4">Export</h2>
+              <ExportButtons
+                faults={faults}
+                costAnalysis={costAnalysis}
+                costParams={costParams}
+              />
+            </section>
+          </TabsContent>
 
-                <section>
-                  <h2 className="text-xl font-semibold mb-4">Export</h2>
-                  <ExportButtons
-                    faults={faults}
-                    costAnalysis={costAnalysis}
-                    costParams={costParams}
-                  />
-                </section>
-              </TabsContent>
+          <TabsContent value="predictive" className="space-y-6 mt-6 animate-slide-up">
+            <section>
+              <h2 className="text-xl font-semibold mb-4">Risk Overview</h2>
+              <RiskSummaryPanel summary={predictiveSummary} />
+            </section>
 
-              <TabsContent value="predictive" className="space-y-6 mt-6">
-                <section>
-                  <h2 className="text-xl font-semibold mb-4">Risk Overview</h2>
-                  <RiskSummaryPanel summary={predictiveSummary} />
-                </section>
+            <section>
+              <PredictiveAlerts alerts={predictiveAlerts} />
+            </section>
+          </TabsContent>
 
-                <section>
-                  <PredictiveAlerts alerts={predictiveAlerts} />
-                </section>
-              </TabsContent>
+          <TabsContent value="health" className="space-y-6 mt-6 animate-slide-up">
+            <section>
+              <h2 className="text-xl font-semibold mb-4">Risk Overview</h2>
+              <RiskSummaryPanel summary={predictiveSummary} />
+            </section>
 
-              <TabsContent value="health" className="space-y-6 mt-6">
-                <section>
-                  <h2 className="text-xl font-semibold mb-4">Risk Overview</h2>
-                  <RiskSummaryPanel summary={predictiveSummary} />
-                </section>
+            <section>
+              <ChargerHealthScore healthData={chargerHealth} />
+            </section>
+          </TabsContent>
+        </Tabs>
+      )}
 
-                <section>
-                  <ChargerHealthScore healthData={chargerHealth} />
-                </section>
-              </TabsContent>
-            </Tabs>
-          )}
-
-          {!isProcessing && faults.length === 0 && (
-            <div className="text-center py-12">
-              <p className="text-muted-foreground">
-                Upload a log file to begin fault analysis
-              </p>
-            </div>
-          )}
+      {!isProcessing && faults.length === 0 && (
+        <div className="text-center py-12 animate-slide-up">
+          <p className="text-muted-foreground">
+            Upload a log file to begin analysis
+          </p>
         </div>
-      </main>
-
-      <footer className="border-t mt-12">
-        <div className="container mx-auto px-4 py-6 text-center text-sm text-muted-foreground">
-          2025 FoloCharge
-        </div>
-      </footer>
+      )}
     </div>
   );
 }

@@ -67,14 +67,9 @@ export default {
                 warning: 'hsl(var(--warning))',
                 info: 'hsl(var(--info))',
                 sidebar: {
-                    DEFAULT: 'hsl(var(--sidebar-background))',
+                    DEFAULT: 'hsl(var(--sidebar))',
                     foreground: 'hsl(var(--sidebar-foreground))',
-                    primary: 'hsl(var(--sidebar-primary))',
-                    'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
-                    accent: 'hsl(var(--sidebar-accent))',
-                    'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
-                    border: 'hsl(var(--sidebar-border))',
-                    ring: 'hsl(var(--sidebar-ring))'
+                    hover: 'hsl(var(--sidebar-hover))'
                 },
                 chart: {
                     '1': 'hsl(var(--chart-1))',
