@@ -2,7 +2,6 @@ import { useGlobalData } from '@/context/DataContext';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { AlertTriangle, FileDown, Zap } from 'lucide-react';
 import { exportFaultsToPDF, exportFaultsToCSV } from '@/utils/exportUtils';
 
@@ -127,78 +126,8 @@ export default function FaultDiagnosis() {
                 Complete list of detected faults with resolution guidance
               </CardDescription>
             </CardHeader>
-            <CardContent className="p-0">
-              <div className="overflow-x-auto">
-                <Table>
-                  <TableHeader>
-                    <TableRow className="bg-muted/50 hover:bg-muted/50">
-                      <TableHead className="font-semibold text-foreground py-4 px-6">Timestamp</TableHead>
-                      <TableHead className="font-semibold text-foreground py-4 px-6">Fault Type</TableHead>
-                      <TableHead className="font-semibold text-foreground py-4 px-6">Connector</TableHead>
-                      <TableHead className="font-semibold text-foreground py-4 px-6">Severity</TableHead>
-                      <TableHead className="font-semibold text-foreground py-4 px-6">Description</TableHead>
-                      <TableHead className="font-semibold text-foreground py-4 px-6">Root Cause</TableHead>
-                      <TableHead className="font-semibold text-foreground py-4 px-6">Resolution</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {globalParsedLogsData.map((fault, index) => (
-                      <TableRow 
-                        key={fault.id}
-                        className="hover:bg-muted/30 transition-colors border-b border-border/50"
-                      >
-                        <TableCell className="font-mono text-sm py-6 px-6 align-top">
-                          <div className="flex flex-col gap-1">
-                            <span className="font-medium text-foreground">
-                              {new Date(fault.timestamp).toLocaleDateString()}
-                            </span>
-                            <span className="text-xs text-muted-foreground">
-                              {new Date(fault.timestamp).toLocaleTimeString()}
-                            </span>
-                          </div>
-                        </TableCell>
-                        <TableCell className="py-6 px-6 align-top">
-                          <div className="flex items-center gap-2">
-                            <div className="h-2 w-2 rounded-full bg-primary" />
-                            <span className="font-semibold text-foreground">{fault.faultType}</span>
-                          </div>
-                        </TableCell>
-                        <TableCell className="py-6 px-6 align-top">
-                          <Badge variant="outline" className="font-mono">
-                            {fault.connectorId}
-                          </Badge>
-                        </TableCell>
-                        <TableCell className="py-6 px-6 align-top">
-                          {getSeverityBadge(fault.severity)}
-                        </TableCell>
-                        <TableCell className="py-6 px-6 align-top max-w-xs">
-                          <div className="space-y-1">
-                            <p className="text-sm font-medium text-foreground leading-relaxed">
-                              {fault.description}
-                            </p>
-                          </div>
-                        </TableCell>
-                        <TableCell className="py-6 px-6 align-top max-w-xs">
-                          <div className="space-y-1">
-                            <p className="text-sm text-muted-foreground leading-relaxed">
-                              {fault.rootCause}
-                            </p>
-                          </div>
-                        </TableCell>
-                        <TableCell className="py-6 px-6 align-top max-w-md">
-                          <div className="space-y-2">
-                            <p className="text-sm text-foreground leading-relaxed">
-                              {fault.resolution}
-                            </p>
-                          </div>
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </div>
-
-              {globalParsedLogsData.length === 0 && (
+            <CardContent className="p-6 space-y-4">
+              {globalParsedLogsData.length === 0 ? (
                 <div className="text-center py-12 px-6">
                   <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-muted mb-4">
                     <AlertTriangle className="h-8 w-8 text-muted-foreground" />
@@ -207,6 +136,95 @@ export default function FaultDiagnosis() {
                   <p className="text-muted-foreground">
                     No faults were found in the uploaded logs. Your chargers are operating normally.
                   </p>
+                </div>
+              ) : (
+                <div className="space-y-4">
+                  {globalParsedLogsData.map((fault, index) => (
+                    <Card key={fault.id} className="border-border/50 hover:border-primary/50 transition-colors">
+                      <CardContent className="p-6">
+                        {/* Header Row - Basic Info */}
+                        <div className="flex flex-wrap items-start gap-4 pb-4 border-b border-border/30">
+                          {/* Timestamp */}
+                          <div className="flex flex-col gap-1 min-w-[140px]">
+                            <span className="text-xs text-muted-foreground uppercase tracking-wide">Timestamp</span>
+                            <div className="flex flex-col">
+                              <span className="font-mono text-sm font-medium text-foreground">
+                                {new Date(fault.timestamp).toLocaleDateString()}
+                              </span>
+                              <span className="font-mono text-xs text-muted-foreground">
+                                {new Date(fault.timestamp).toLocaleTimeString()}
+                              </span>
+                            </div>
+                          </div>
+
+                          {/* Fault Type */}
+                          <div className="flex flex-col gap-1 min-w-[180px]">
+                            <span className="text-xs text-muted-foreground uppercase tracking-wide">Fault Type</span>
+                            <div className="flex items-center gap-2">
+                              <div className="h-2 w-2 rounded-full bg-primary flex-shrink-0" />
+                              <span className="font-semibold text-foreground">{fault.faultType}</span>
+                            </div>
+                          </div>
+
+                          {/* Connector */}
+                          <div className="flex flex-col gap-1 min-w-[120px]">
+                            <span className="text-xs text-muted-foreground uppercase tracking-wide">Connector</span>
+                            <Badge variant="outline" className="font-mono w-fit">
+                              {fault.connectorId}
+                            </Badge>
+                          </div>
+
+                          {/* Severity */}
+                          <div className="flex flex-col gap-1 min-w-[100px]">
+                            <span className="text-xs text-muted-foreground uppercase tracking-wide">Severity</span>
+                            {getSeverityBadge(fault.severity)}
+                          </div>
+                        </div>
+
+                        {/* Details Grid - Description, Root Cause, Resolution */}
+                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 pt-4">
+                          {/* Description */}
+                          <div className="space-y-2">
+                            <div className="flex items-center gap-2">
+                              <div className="h-1 w-1 rounded-full bg-primary" />
+                              <h4 className="text-sm font-semibold text-foreground uppercase tracking-wide">
+                                Description
+                              </h4>
+                            </div>
+                            <p className="text-sm text-foreground leading-relaxed pl-3 border-l-2 border-primary/20">
+                              {fault.description}
+                            </p>
+                          </div>
+
+                          {/* Root Cause */}
+                          <div className="space-y-2">
+                            <div className="flex items-center gap-2">
+                              <div className="h-1 w-1 rounded-full bg-yellow-500" />
+                              <h4 className="text-sm font-semibold text-foreground uppercase tracking-wide">
+                                Root Cause
+                              </h4>
+                            </div>
+                            <p className="text-sm text-muted-foreground leading-relaxed pl-3 border-l-2 border-yellow-500/20">
+                              {fault.rootCause}
+                            </p>
+                          </div>
+
+                          {/* Resolution */}
+                          <div className="space-y-2">
+                            <div className="flex items-center gap-2">
+                              <div className="h-1 w-1 rounded-full bg-green-500" />
+                              <h4 className="text-sm font-semibold text-foreground uppercase tracking-wide">
+                                Resolution
+                              </h4>
+                            </div>
+                            <p className="text-sm text-foreground leading-relaxed pl-3 border-l-2 border-green-500/20">
+                              {fault.resolution}
+                            </p>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
                 </div>
               )}
             </CardContent>
