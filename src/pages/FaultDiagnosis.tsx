@@ -121,43 +121,76 @@ export default function FaultDiagnosis() {
 
           {/* Fault Details Table */}
           <Card className="shadow-premium">
-            <CardHeader>
-              <CardTitle>Fault Details</CardTitle>
-              <CardDescription>
+            <CardHeader className="pb-4">
+              <CardTitle className="text-2xl">Fault Details</CardTitle>
+              <CardDescription className="text-base">
                 Complete list of detected faults with resolution guidance
               </CardDescription>
             </CardHeader>
-            <CardContent>
-              <div className="rounded-md border">
+            <CardContent className="p-0">
+              <div className="overflow-x-auto">
                 <Table>
                   <TableHeader>
-                    <TableRow>
-                      <TableHead>Timestamp</TableHead>
-                      <TableHead>Fault Type</TableHead>
-                      <TableHead>Connector</TableHead>
-                      <TableHead>Severity</TableHead>
-                      <TableHead>Description</TableHead>
-                      <TableHead>Root Cause</TableHead>
-                      <TableHead>Resolution</TableHead>
+                    <TableRow className="bg-muted/50 hover:bg-muted/50">
+                      <TableHead className="font-semibold text-foreground py-4 px-6">Timestamp</TableHead>
+                      <TableHead className="font-semibold text-foreground py-4 px-6">Fault Type</TableHead>
+                      <TableHead className="font-semibold text-foreground py-4 px-6">Connector</TableHead>
+                      <TableHead className="font-semibold text-foreground py-4 px-6">Severity</TableHead>
+                      <TableHead className="font-semibold text-foreground py-4 px-6">Description</TableHead>
+                      <TableHead className="font-semibold text-foreground py-4 px-6">Root Cause</TableHead>
+                      <TableHead className="font-semibold text-foreground py-4 px-6">Resolution</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {globalParsedLogsData.map((fault) => (
-                      <TableRow key={fault.id}>
-                        <TableCell className="font-mono text-sm">
-                          {new Date(fault.timestamp).toLocaleString()}
+                    {globalParsedLogsData.map((fault, index) => (
+                      <TableRow 
+                        key={fault.id}
+                        className="hover:bg-muted/30 transition-colors border-b border-border/50"
+                      >
+                        <TableCell className="font-mono text-sm py-6 px-6 align-top">
+                          <div className="flex flex-col gap-1">
+                            <span className="font-medium text-foreground">
+                              {new Date(fault.timestamp).toLocaleDateString()}
+                            </span>
+                            <span className="text-xs text-muted-foreground">
+                              {new Date(fault.timestamp).toLocaleTimeString()}
+                            </span>
+                          </div>
                         </TableCell>
-                        <TableCell className="font-medium">{fault.faultType}</TableCell>
-                        <TableCell>{fault.connectorId}</TableCell>
-                        <TableCell>{getSeverityBadge(fault.severity)}</TableCell>
-                        <TableCell className="max-w-xs">
-                          <p className="text-sm">{fault.description}</p>
+                        <TableCell className="py-6 px-6 align-top">
+                          <div className="flex items-center gap-2">
+                            <div className="h-2 w-2 rounded-full bg-primary" />
+                            <span className="font-semibold text-foreground">{fault.faultType}</span>
+                          </div>
                         </TableCell>
-                        <TableCell className="max-w-xs">
-                          <p className="text-sm text-muted-foreground">{fault.rootCause}</p>
+                        <TableCell className="py-6 px-6 align-top">
+                          <Badge variant="outline" className="font-mono">
+                            {fault.connectorId}
+                          </Badge>
                         </TableCell>
-                        <TableCell className="max-w-md">
-                          <p className="text-sm">{fault.resolution}</p>
+                        <TableCell className="py-6 px-6 align-top">
+                          {getSeverityBadge(fault.severity)}
+                        </TableCell>
+                        <TableCell className="py-6 px-6 align-top max-w-xs">
+                          <div className="space-y-1">
+                            <p className="text-sm font-medium text-foreground leading-relaxed">
+                              {fault.description}
+                            </p>
+                          </div>
+                        </TableCell>
+                        <TableCell className="py-6 px-6 align-top max-w-xs">
+                          <div className="space-y-1">
+                            <p className="text-sm text-muted-foreground leading-relaxed">
+                              {fault.rootCause}
+                            </p>
+                          </div>
+                        </TableCell>
+                        <TableCell className="py-6 px-6 align-top max-w-md">
+                          <div className="space-y-2">
+                            <p className="text-sm text-foreground leading-relaxed">
+                              {fault.resolution}
+                            </p>
+                          </div>
                         </TableCell>
                       </TableRow>
                     ))}
@@ -166,8 +199,14 @@ export default function FaultDiagnosis() {
               </div>
 
               {globalParsedLogsData.length === 0 && (
-                <div className="text-center py-8">
-                  <p className="text-muted-foreground">No faults detected in the uploaded logs</p>
+                <div className="text-center py-12 px-6">
+                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-muted mb-4">
+                    <AlertTriangle className="h-8 w-8 text-muted-foreground" />
+                  </div>
+                  <h3 className="text-lg font-semibold mb-2">No Faults Detected</h3>
+                  <p className="text-muted-foreground">
+                    No faults were found in the uploaded logs. Your chargers are operating normally.
+                  </p>
                 </div>
               )}
             </CardContent>
