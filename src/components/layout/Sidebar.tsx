@@ -166,7 +166,7 @@ export function Sidebar() {
             </Link>
             <div className="mt-4 px-3 pt-4 border-t border-border/40">
               <p className="text-xs text-muted-foreground">
-                Built with ⚡ by <span className="font-semibold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Folonite</span>
+                Built by <span className="font-semibold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Folonite</span>
               </p>
               <p className="text-[10px] text-muted-foreground mt-1">Version 1.0.0</p>
             </div>

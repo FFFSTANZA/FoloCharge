@@ -171,14 +171,14 @@ export default function About() {
           <p className="text-sm text-muted-foreground mb-2">Built by</p>
           <h2 className="text-3xl font-bold gradient-text">Folonite</h2>
           <p className="text-sm text-muted-foreground mt-2">
-            Empowering EV infrastructure with intelligent software solutions
+            Mobility Behaviour Intelligence System
           </p>
         </CardContent>
       </Card>
 
       {/* Version Info */}
       <div className="text-center text-sm text-muted-foreground animate-slide-up" style={{ animationDelay: '0.5s' }}>
-        <p>FoloCharge v1.0 • 2025 • Made for Indian EV Operators</p>
+        <p>Folonite v1.0 • 2026 • Made for Indian EV Operators</p>
       </div>
     </div>
   );
