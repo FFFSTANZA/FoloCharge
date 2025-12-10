@@ -1,4 +1,4 @@
-# FoloCharge Fault Diagnoser - Feature Summary
+# Folonite DMS Fault Diagnoser - Feature Summary
 
 ## ✨ Key Features
 

@@ -34,7 +34,7 @@ const Header = () => {
             </div>
             <div className="flex flex-col">
               <span className="text-xl font-bold bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent">
-                FoloCharge
+                Folonite DMS
               </span>
               <span className="text-[10px] text-muted-foreground font-medium tracking-wider">
                 FAULT DIAGNOSER

@@ -1,7 +1,7 @@
-# FoloCharge Fault Diagnoser - Usage Guide
+# Folonite DMS Fault Diagnoser - Usage Guide
 
 ## Overview
-FoloCharge is a web-based diagnostic tool for EV charging station owners to analyze charger failures, identify root causes, and calculate revenue impact in INR.
+Folonite DMS is a web-based diagnostic tool for EV charging station owners to analyze charger failures, identify root causes, and calculate revenue impact in INR.
 
 ## Getting Started
 

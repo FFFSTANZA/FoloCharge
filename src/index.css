@@ -11,7 +11,7 @@ All colors MUST be HSL.
   :root {
     --radius: 0.5rem;
     
-    /* Premium FoloCharge Theme - Light Mode */
+    /* Premium Folonite DMS Theme - Light Mode */
     --background: 220 13% 96%;
     --foreground: 0 0% 4%;
     --card: 0 0% 100%;
@@ -62,7 +62,7 @@ All colors MUST be HSL.
   }
 
   .dark {
-    /* Premium FoloCharge Theme - Dark Mode */
+    /* Premium Folonite DMS Theme - Dark Mode */
     --background: 0 0% 4%;
     --foreground: 0 0% 98%;
     --card: 0 0% 8%;
@@ -123,7 +123,7 @@ All colors MUST be HSL.
   }
 }
 
-/* Premium FoloCharge Animations */
+/* Premium Folonite DMS Animations */
 @keyframes fadeIn {
   from {
     opacity: 0;

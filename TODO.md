@@ -1,4 +1,4 @@
-# FoloCharge Fault Diagnoser - Implementation Plan
+# Folonite DMS Fault Diagnoser - Implementation Plan
 
 ## Plan
 - [x] Step 1: Update design system (index.css) with professional blue color scheme

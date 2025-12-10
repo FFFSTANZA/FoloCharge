@@ -2,13 +2,13 @@
 Miaoda Application Link URL
     URL:https://medo.dev/projects/app-83z1j797a1a9
 
-# FoloCharge - Premium EV Charging Operations Platform
+# Folonite DMS - Premium EV Charging Operations Platform
 
 **Smarter EV Operations for India — No Setup, Just Upload.**
 
 ## Overview
 
-FoloCharge is a comprehensive, enterprise-level web platform designed for Indian EV charging station owners and operators. Built with a premium SaaS interface, it provides instant insights into charger health, revenue optimization, and predictive maintenance.
+Folonite DMS is a comprehensive, enterprise-level web platform designed for Indian EV charging station owners and operators. Built with a premium SaaS interface, it provides instant insights into charger health, revenue optimization, and predictive maintenance.
 
 ### Complete Solution
 - **Dashboard Home** - Executive summary with key metrics
@@ -108,7 +108,7 @@ FoloCharge is a comprehensive, enterprise-level web platform designed for Indian
 - **Route-Based Tabs** - Smart tab selection based on current page
 - **Animated Transitions** - Smooth fade-in and slide-up effects
 - **Color-Coded Status** - Instant visual feedback with semantic colors
-- **Professional Branding** - FoloCharge logo with "Built by Folonite"
+- **Professional Branding** - Folonite DMS logo with "Built by Folonite"
 
 ### Executive Dashboard
 - **Today's Metrics** - Faults, revenue loss, critical alerts, fleet health
@@ -149,7 +149,7 @@ FoloCharge is a comprehensive, enterprise-level web platform designed for Indian
 │   │   ├── Dashboard.tsx # Fault/Cost/Predictive page
 │   │   ├── Analyzer.tsx # Site/Charger analytics page
 │   │   ├── Help.tsx # Help & documentation page
-│   │   └── About.tsx # About FoloCharge page
+│   │   └── About.tsx # About Folonite DMS page
 │   ├── types # Type definitions directory
 │   │   ├── fault.ts # Fault diagnoser types
 │   │   ├── analytics.ts # Revenue analyzer types
@@ -306,6 +306,7 @@ You can also check the help documentation: Download and Building the app（ [htt
 
 ## License
 
-Copyright 2025 FoloCharge
-# FoloCharge
+Copyright 2025 Folonite DMS
+# Folonite DMS
+# Folonite DMS
 # FoloCharge

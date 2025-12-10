@@ -294,5 +294,5 @@ The Predictive Failure Indicator transforms reactive maintenance into proactive 
 
 ---
 
-**FoloCharge Phase 3** - Predictive Failure Indicator  
+**Folonite DMS Phase 3** - Predictive Failure Indicator  
 Rule-Based Pattern Detection for EV Charging Infrastructure

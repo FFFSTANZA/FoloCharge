@@ -2,7 +2,7 @@
 
 ## Overview
 
-FoloCharge now includes an intelligent **Vendor-Agnostic Log Format Detection** system that automatically identifies and normalizes log files from any EV charger manufacturer in India. No manual configuration required!
+Folonite DMS now includes an intelligent **Vendor-Agnostic Log Format Detection** system that automatically identifies and normalizes log files from any EV charger manufacturer in India. No manual configuration required!
 
 ## Supported Vendors
 
@@ -42,7 +42,7 @@ When you upload a log file, the system:
 
 ### 2. Field Normalization
 
-The system maps vendor-specific field names to FoloCharge's standard schema:
+The system maps vendor-specific field names to Folonite DMS's standard schema:
 
 | Standard Field | Vendor Examples |
 |----------------|-----------------|
@@ -60,7 +60,7 @@ The system automatically:
 
 - **Fixes Timestamps**: Converts various formats to ISO 8601
 - **Normalizes Connector IDs**: Extracts numeric IDs from strings
-- **Maps Error Codes**: Translates vendor codes to FoloCharge fault types
+- **Maps Error Codes**: Translates vendor codes to Folonite DMS fault types
 - **Validates Ranges**: Checks voltage (0-1000V), current (0-500A), temperature (-50-150°C)
 - **Removes Corrupted Lines**: Filters out empty or malformed entries
 
@@ -149,9 +149,9 @@ event_time,delta_error,EVSE_ID,Volt_R,Temp_C
 
 ## Error Code Mapping
 
-The system automatically maps vendor error codes to FoloCharge fault types:
+The system automatically maps vendor error codes to Folonite DMS fault types:
 
-| Vendor Pattern | FoloCharge Fault |
+| Vendor Pattern | Folonite DMS Fault |
 |----------------|------------------|
 | OVERCURRENT, OC, OVER_CURRENT | OVERCURRENT |
 | OVERVOLTAGE, OV, OVER_VOLT | OVERVOLTAGE |
@@ -180,7 +180,7 @@ Common warnings you might see:
 
 ## Integration with Modules
 
-The vendor detection system integrates seamlessly with all FoloCharge modules:
+The vendor detection system integrates seamlessly with all Folonite DMS modules:
 
 ### Fault Diagnosis
 - Normalized logs feed directly into fault classifier

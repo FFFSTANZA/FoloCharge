@@ -1,4 +1,4 @@
-# FoloCharge Revenue Analyzer - User Guide
+# Folonite DMS Revenue Analyzer - User Guide
 
 ## Overview
 
@@ -217,4 +217,4 @@ For issues or questions:
 
 **Version**: 1.0.0  
 **Last Updated**: December 9, 2025  
-**Compatible With**: FoloCharge Phase 2
+**Compatible With**: Folonite DMS Phase 2

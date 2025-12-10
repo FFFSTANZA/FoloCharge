@@ -1,4 +1,4 @@
-# FoloCharge Phase 2 - Implementation Summary
+# Folonite DMS Phase 2 - Implementation Summary
 
 ## ✅ Implementation Status: COMPLETE
 
@@ -296,7 +296,7 @@ npm run lint
 
 ### Navigation Flow
 ```
-FoloCharge
+Folonite DMS
 ├── Fault Diagnoser (/)
 │   ├── Upload charger logs
 │   ├── Detect faults

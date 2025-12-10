@@ -1,12 +1,12 @@
-# FoloCharge Requirements Document
+# Folonite DMS Requirements Document
 
 ## 1. Application Overview
 
 ### 1.1 Application Name
-FoloCharge – Smarter EV Operations for India
+Folonite DMS – Smarter EV Operations for India
 
 ### 1.2 Application Description
-A premium, enterprise-level SaaS platform designed for Indian EV charging station owners and operators. FoloCharge integrates four core modules into a unified dashboard:\n- **Fault Diagnoser**: Analyzes charger failures through log file uploads with fault categorization and root cause analysis
+A premium, enterprise-level SaaS platform designed for Indian EV charging station owners and operators. Folonite DMS integrates four core modules into a unified dashboard:\n- **Fault Diagnoser**: Analyzes charger failures through log file uploads with fault categorization and root cause analysis
 - **Auto-Downtime Cost Calculator**: Calculates revenue loss in INR based on downtime\n- **Predictive Failure Indicator**: Rule-based pattern detection for proactive maintenance
 - **Multi-Site Revenue Analyzer**: Comprehensive site and charger performance analytics
 
@@ -28,7 +28,7 @@ EV charging station owners, operators, and decision-makers in the Indian market\
 - 🔌Charger Analytics
 \n**Footer Section**
 - Help & Documentation
-- About FoloCharge
+- About Folonite DMS
 - Version Number (v1.0)
 - Built by Folonite
 \n### 2.2 Navigation Features
@@ -269,7 +269,7 @@ Upload → Process → Show Insights → Export
 ## 12. Branding & Visual Identity
 
 ### 12.1 Brand Elements
-- **Name**: FoloCharge
+- **Name**: Folonite DMS
 - **Logo**: Simple electric bolt + F text combination
 - **Footer Credit**: Built by Folonite\n\n### 12.2 Brand Application
 Consistent branding across:\n- Page headers
@@ -396,7 +396,7 @@ Recognize standard OCPP events:
 - Heartbeat
 - StartTransaction
 - StopTransaction\n\n### 16.4 Auto-Mapping Fields
-\n#### 16.4.1 Standard FoloCharge Fields
+\n#### 16.4.1 Standard Folonite DMS Fields
 - timestamp
 - errorCode
 - connectorId\n- status

@@ -16,7 +16,7 @@ A comprehensive **Vendor-Agnostic Log Format Detection** system that automatical
 ### 2. Universal Field Mapping ✅
 
 - **50+ Field Mappings**: Covers all common vendor field names
-- **Smart Normalization**: Converts to unified FoloCharge schema
+- **Smart Normalization**: Converts to unified Folonite DMS schema
 - **Type Conversion**: Handles strings, numbers, timestamps
 - **Extensible Design**: Easy to add new vendors and fields
 
@@ -73,7 +73,7 @@ Validator
     └─ Warning Generation
     ↓
 Unified Output
-    └─ FoloCharge Standard Schema
+    └─ Folonite DMS Standard Schema
 ```
 
 ### Files Created
@@ -255,4 +255,4 @@ The Vendor-Agnostic Log Format Detection system is a **production-ready** featur
 - ✅ Works entirely client-side
 - ✅ Is fully documented and tested
 
-This feature eliminates the need for manual vendor configuration and ensures consistent, reliable data processing across all FoloCharge modules, regardless of the charger manufacturer or log format.
+This feature eliminates the need for manual vendor configuration and ensures consistent, reliable data processing across all Folonite DMS modules, regardless of the charger manufacturer or log format.

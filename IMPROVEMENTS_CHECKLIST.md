@@ -1,4 +1,4 @@
-# FoloCharge Phase 4 - Improvements Checklist
+# Folonite DMS Phase 4 - Improvements Checklist
 
 ## ✅ All Requirements Completed
 

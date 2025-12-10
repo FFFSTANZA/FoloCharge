@@ -1,4 +1,4 @@
-# FoloCharge Phase 2 - Multi-Site Revenue & Utilization Analyzer
+# Folonite DMS Phase 2 - Multi-Site Revenue & Utilization Analyzer
 
 ## Plan
 - [x] Step 1: Create type definitions for analytics data structures

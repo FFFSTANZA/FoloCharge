@@ -84,7 +84,7 @@ All phases have been successfully implemented:
 1. **Vendor Detection Engine**: Automatically detects vendor from log content using pattern matching
 2. **Format Detection**: Identifies CSV, JSON, TXT, OCPP, and Mixed formats
 3. **Field Mapping**: Maps 50+ vendor-specific field names to standard schema
-4. **Normalization**: Converts all vendor formats to unified FoloCharge format
+4. **Normalization**: Converts all vendor formats to unified Folonite DMS format
 5. **Validation**: Fixes timestamps, connector IDs, error codes automatically
 6. **UI Integration**: Shows vendor detection banner with confidence score
 7. **Toast Notifications**: Real-time feedback on vendor detection

@@ -11,7 +11,7 @@ export function exportToPDF(
   const doc = new jsPDF();
 
   doc.setFontSize(20);
-  doc.text('FoloCharge Fault Diagnosis Report', 14, 20);
+  doc.text('Folonite DMS Fault Diagnosis Report', 14, 20);
 
   doc.setFontSize(10);
   doc.text(`Generated: ${new Date().toLocaleString()}`, 14, 28);
@@ -73,7 +73,7 @@ export function exportToPDF(
     headStyles: { fillColor: [37, 99, 235] }
   });
 
-  doc.save(`folocharge-fault-report-${Date.now()}.pdf`);
+  doc.save(`Folonite DMS-fault-report-${Date.now()}.pdf`);
 }
 
 export function exportToCSV(faults: FaultAnalysis[], costParams: CostParameters): void {
@@ -126,7 +126,7 @@ export function exportToCSV(faults: FaultAnalysis[], costParams: CostParameters)
   const url = URL.createObjectURL(blob);
 
   link.setAttribute('href', url);
-  link.setAttribute('download', `folocharge-fault-data-${Date.now()}.csv`);
+  link.setAttribute('download', `Folonite DMS-fault-data-${Date.now()}.csv`);
   link.style.visibility = 'hidden';
 
   document.body.appendChild(link);
@@ -138,7 +138,7 @@ export function exportRecommendationsToPDF(recommendations: any[]): void {
   const doc = new jsPDF();
 
   doc.setFontSize(20);
-  doc.text('FoloCharge Business Recommendations', 14, 20);
+  doc.text('Folonite DMS Business Recommendations', 14, 20);
 
   doc.setFontSize(10);
   doc.text(`Generated: ${new Date().toLocaleString()}`, 14, 28);
@@ -177,7 +177,7 @@ export function exportRecommendationsToPDF(recommendations: any[]): void {
     }
   });
 
-  doc.save(`folocharge-recommendations-${Date.now()}.pdf`);
+  doc.save(`Folonite DMS-recommendations-${Date.now()}.pdf`);
 }
 
 export function exportRecommendationsToCSV(recommendations: any[]): void {
@@ -202,7 +202,7 @@ export function exportRecommendationsToCSV(recommendations: any[]): void {
   const url = URL.createObjectURL(blob);
 
   link.setAttribute('href', url);
-  link.setAttribute('download', `folocharge-recommendations-${Date.now()}.csv`);
+  link.setAttribute('download', `Folonite DMS-recommendations-${Date.now()}.csv`);
   link.style.visibility = 'hidden';
 
   document.body.appendChild(link);
@@ -215,7 +215,7 @@ export function exportFaultsToPDF(faults: FaultAnalysis[]): void {
   const doc = new jsPDF();
 
   doc.setFontSize(20);
-  doc.text('FoloCharge Fault Diagnosis Report', 14, 20);
+  doc.text('Folonite DMS Fault Diagnosis Report', 14, 20);
 
   doc.setFontSize(10);
   doc.text(`Generated: ${new Date().toLocaleString()}`, 14, 28);
@@ -243,7 +243,7 @@ export function exportFaultsToPDF(faults: FaultAnalysis[]): void {
     headStyles: { fillColor: [37, 99, 235] },
   });
 
-  doc.save(`folocharge-faults-${Date.now()}.pdf`);
+  doc.save(`Folonite DMS-faults-${Date.now()}.pdf`);
 }
 
 export function exportFaultsToCSV(faults: FaultAnalysis[]): void {
@@ -268,7 +268,7 @@ export function exportFaultsToCSV(faults: FaultAnalysis[]): void {
   const url = URL.createObjectURL(blob);
 
   link.setAttribute('href', url);
-  link.setAttribute('download', `folocharge-faults-${Date.now()}.csv`);
+  link.setAttribute('download', `Folonite DMS-faults-${Date.now()}.csv`);
   link.style.visibility = 'hidden';
 
   document.body.appendChild(link);
@@ -280,7 +280,7 @@ export function exportCostAnalysisToPDF(costData: any): void {
   const doc = new jsPDF();
 
   doc.setFontSize(20);
-  doc.text('FoloCharge Cost Analysis Report', 14, 20);
+  doc.text('Folonite DMS Cost Analysis Report', 14, 20);
 
   doc.setFontSize(10);
   doc.text(`Generated: ${new Date().toLocaleString()}`, 14, 28);
@@ -312,5 +312,5 @@ export function exportCostAnalysisToPDF(costData: any): void {
     headStyles: { fillColor: [37, 99, 235] },
   });
 
-  doc.save(`folocharge-cost-analysis-${Date.now()}.pdf`);
+  doc.save(`Folonite DMS-cost-analysis-${Date.now()}.pdf`);
 }
